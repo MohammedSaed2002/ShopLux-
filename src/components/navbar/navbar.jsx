@@ -1,18 +1,37 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/useAuthStore";
 
 export default function Navbar() {
+  const token = useAuthStore((state) => state.token);
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <nav style={styles.nav}>
-      <div style={styles.logo}>MyApp</div>
+      <div style={styles.logo}>ShopLux</div>
 
       <ul style={styles.links}>
-        <li style={styles.link}>Home</li>
-        <li style={styles.link}>About</li>
-        <li style={styles.link}>Services</li>
-        <li style={styles.link}>Contact</li>
+        <li><Link to="/" style={styles.link}>Home</Link></li>
+        <li><Link to="/products" style={styles.link}>Products</Link></li>
+        <li><Link to="/cart" style={styles.link}>Cart</Link></li>
       </ul>
 
-      <button style={styles.button}>Login</button>
+      <div style={styles.buttons}>
+        {token ? (
+          <button onClick={handleLogout} style={styles.button}>Logout</button>
+        ) : (
+          <>
+            <Link to="/login" style={styles.button}>Login</Link>
+            <Link to="/register" style={styles.registerButton}>Register</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }
@@ -38,7 +57,13 @@ const styles = {
     padding: 0,
   },
   link: {
+    color: "#fff",
+    textDecoration: "none",
     cursor: "pointer",
+  },
+  buttons: {
+    display: "flex",
+    gap: "10px",
   },
   button: {
     backgroundColor: "#00bcd4",
@@ -47,5 +72,14 @@ const styles = {
     color: "#fff",
     borderRadius: "6px",
     cursor: "pointer",
+    textDecoration: "none",
+  },
+  registerButton: {
+    backgroundColor: "#fff",
+    padding: "8px 16px",
+    color: "#111",
+    borderRadius: "6px",
+    cursor: "pointer",
+    textDecoration: "none",
   },
 };

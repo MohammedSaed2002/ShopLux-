@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'; 
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '../api/axiosInstance';
 export default function useCategories() {
 
 
