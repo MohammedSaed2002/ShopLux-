@@ -3,11 +3,14 @@ import { useParams } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import useProduct from '../../hooks/useProduct'
+import useAddToCart from '../../hooks/useAddToCart'
 
 export default function ProductDetails() {
     const { id } = useParams();
-    const { data, isError, isLoading } = useProduct(id);
+    const { data, isLoading } = useProduct(id);
+    const { mutate: addToCart } = useAddToCart();
 
     if (isLoading) return <CircularProgress />
 
@@ -33,6 +36,13 @@ export default function ProductDetails() {
                 <Typography variant="body1" sx={{ marginTop: 1 }}>
                     {data.response.description || "No Description"}
                 </Typography>
+                <Button
+                    variant="contained"
+                    sx={{ marginTop: 2 }}
+                    onClick={() => addToCart({ productId: data.response.id, count: 1 })}
+                >
+                    Add to Cart
+                </Button>
             </Box>
         </Box>
     )
