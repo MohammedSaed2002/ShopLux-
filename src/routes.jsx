@@ -5,7 +5,7 @@ import Cart from "./pages/cart/Cart"
 import Login from "./pages/login/Login"
 import Products from "./pages/products/Products"
 import Register from "./pages/register/Register"
-import ProductDetails from "./pages/ProductDetails/ProductDetails"
+import ProductDetails from "./pages/productDetails/ProductDetails"
 import ProtectedRouter from "./components/ProtectedRouter/ProtectedRouter"
 
 const router = createBrowserRouter([
