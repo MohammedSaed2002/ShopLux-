@@ -8,11 +8,12 @@ import CardMedia from "@mui/material/CardMedia"
 import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import useProducts from "../../hooks/useProducts"
 import useAddToCart from "../../hooks/useAddToCart"
 
 export default function Products() {
-
+    const { t } = useTranslation();
     const { data, isLoading, isError } = useProducts();
     const { mutate: addToCart } = useAddToCart();
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function Products() {
 
     return (
         <Box className="products" component="section">
-            <Typography component="h1" variant="h2">Products</Typography>
+            <Typography component="h1" variant="h2">{t("products.title")}</Typography>
             <Grid container spacing={{ xs: 2, md: 3 }} sx={{ textAlign: 'center' }}>
                 {data.response.data.map((product) => (
                     <Grid item size={{ xs: 12, sm: 6, md: 4 }} key={product.id}>
@@ -43,7 +44,7 @@ export default function Products() {
                                 addToCart({ productId: product.id, count: 1 });
                             }}
                         >
-                            Add to Cart
+                            {t("products.addToCart")}
                         </Button>
                     </Grid>
                 ))}

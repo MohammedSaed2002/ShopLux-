@@ -11,11 +11,13 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import AddIcon from "@mui/icons-material/Add"
 import RemoveIcon from "@mui/icons-material/Remove"
+import { useTranslation } from "react-i18next"
 import useCart from "../../hooks/useCart"
 import useUpdateCartQty from "../../hooks/useUpdateCartQty"
 import useRemoveFromCart from "../../hooks/useRemoveFromCart"
 
 export default function Cart() {
+    const { t } = useTranslation();
     const { data, isLoading } = useCart();
     const { mutate: updateQty } = useUpdateCartQty();
     const { mutate: removeItem } = useRemoveFromCart();
@@ -38,23 +40,23 @@ export default function Cart() {
     return (
         <Box sx={{ padding: 4 }}>
             <Typography variant="h2" sx={{ marginBottom: 3 }}>
-                Cart
+                {t("cart.title")}
             </Typography>
             <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell><strong>Product Name</strong></TableCell>
-                            <TableCell><strong>Price</strong></TableCell>
-                            <TableCell><strong>Quantity</strong></TableCell>
-                            <TableCell><strong>Total</strong></TableCell>
-                            <TableCell><strong>Actions</strong></TableCell>
+                            <TableCell><strong>{t("cart.productName")}</strong></TableCell>
+                            <TableCell><strong>{t("cart.price")}</strong></TableCell>
+                            <TableCell><strong>{t("cart.quantity")}</strong></TableCell>
+                            <TableCell><strong>{t("cart.total")}</strong></TableCell>
+                            <TableCell><strong>{t("cart.actions")}</strong></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {data?.items?.map((item) => (
                             <TableRow key={item.productId}>
-                                <TableCell>{item.productName || "No Name"}</TableCell>
+                                <TableCell>{item.productName || t("cart.noName")}</TableCell>
                                 <TableCell>{item.price}$</TableCell>
                                 <TableCell>
                                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -74,7 +76,7 @@ export default function Cart() {
                                         sx={{ color: "error.main", cursor: "pointer", fontWeight: "bold" }}
                                         onClick={() => handleRemove(item.productId)}
                                     >
-                                        REMOVE
+                                        {t("cart.remove")}
                                     </Typography>
                                 </TableCell>
                             </TableRow>
@@ -84,7 +86,7 @@ export default function Cart() {
             </TableContainer>
             {data?.cartTotal !== undefined && (
                 <Typography variant="h6" sx={{ marginTop: 3 }}>
-                    Cart Total: ${data.cartTotal}
+                    {t("cart.cartTotal")}: ${data.cartTotal}
                 </Typography>
             )}
         </Box>

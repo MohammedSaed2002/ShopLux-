@@ -1,0 +1,48 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "cart": {
+    "title": "Cart",
+    "productName": "Product Name",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "actions": "Actions",
+    "remove": "REMOVE",
+    "cartTotal": "Cart Total",
+    "noName": "No Name"
+  },
+  "products": {
+    "title": "Products",
+    "addToCart": "Add to Cart"
+  },
+  "productDetails": {
+    "price": "Price",
+    "rate": "Rate",
+    "noName": "No Name",
+    "noDescription": "No Description",
+    "addToCart": "Add to Cart"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "registerTitle": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Name",
+    "userName": "Username",
+    "fullName": "Full Name",
+    "phoneNumber": "Phone Number",
+    "loginButton": "Login",
+    "registerButton": "Register"
+  },
+  "common": {
+    "loading": "Loading..."
+  }
+}

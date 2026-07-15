@@ -8,11 +8,13 @@ import axios from 'axios';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import useAuthStore from '../../store/useAuthStore';
 
 export default function Login() {
 
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const setToken = useAuthStore((state) => state.setToken);
 
     const loginSchema = yup.object({
@@ -38,13 +40,13 @@ export default function Login() {
     return (
         <Box component="section" className="LoginPage">
             <Typography component="h1" variant="h2">
-                Login
+                {t("auth.loginTitle")}
             </Typography>
             <Box onSubmit={handleSubmit(LoginForm)} component="form" sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <TextField
                     fullWidth
                     {...register("email")}
-                    label="email"
+                    label={t("auth.email")}
                     variant="outlined"
                     error={!!errors.email}
                     helperText={errors.email?.message}
@@ -52,13 +54,13 @@ export default function Login() {
                 <TextField
                     fullWidth
                     {...register("password")}
-                    label="password"
+                    label={t("auth.password")}
                     variant="outlined"
                     error={!!errors.password}
                     helperText={errors.password?.message}
                 />
                 <Button variant="contained" type="submit">
-                    Login
+                    {t("auth.loginButton")}
                 </Button>
             </Box>
         </Box>

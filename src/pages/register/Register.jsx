@@ -8,10 +8,12 @@ import axios from 'axios';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Register() {
 
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const registerSchema = yup.object({
         userName: yup.string().required(),
@@ -39,13 +41,13 @@ export default function Register() {
     return (
         <Box component="section" className="registerPage">
             <Typography component="h1" variant="h2">
-                Register
+                {t("auth.registerTitle")}
             </Typography>
             <Box onSubmit={handleSubmit(RegisterForm)} component="form" sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <TextField
                     fullWidth
                     {...register("userName")}
-                    label="userName"
+                    label={t("auth.userName")}
                     variant="outlined"
                     error={!!errors.userName}
                     helperText={errors.userName?.message}
@@ -53,7 +55,7 @@ export default function Register() {
                 <TextField
                     fullWidth
                     {...register("fullName")}
-                    label="full Name"
+                    label={t("auth.fullName")}
                     variant="outlined"
                     error={!!errors.fullName}
                     helperText={errors.fullName?.message}
@@ -61,7 +63,7 @@ export default function Register() {
                 <TextField
                     fullWidth
                     {...register("email")}
-                    label="email"
+                    label={t("auth.email")}
                     variant="outlined"
                     error={!!errors.email}
                     helperText={errors.email?.message}
@@ -69,7 +71,7 @@ export default function Register() {
                 <TextField
                     fullWidth
                     {...register("phoneNumber")}
-                    label="phoneNumber"
+                    label={t("auth.phoneNumber")}
                     variant="outlined"
                     error={!!errors.phoneNumber}
                     helperText={errors.phoneNumber?.message}
@@ -77,13 +79,13 @@ export default function Register() {
                 <TextField
                     fullWidth
                     {...register("password")}
-                    label="password"
+                    label={t("auth.password")}
                     variant="outlined"
                     error={!!errors.password}
                     helperText={errors.password?.message}
                 />
                 <Button variant="contained" type="submit">
-                    Register
+                    {t("auth.registerButton")}
                 </Button>
             </Box>
         </Box>

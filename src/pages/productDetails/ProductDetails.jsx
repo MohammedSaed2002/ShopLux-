@@ -4,11 +4,13 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import { useTranslation } from 'react-i18next'
 import useProduct from '../../hooks/useProduct'
 import useAddToCart from '../../hooks/useAddToCart'
 
 export default function ProductDetails() {
     const { id } = useParams();
+    const { t } = useTranslation();
     const { data, isLoading } = useProduct(id);
     const { mutate: addToCart } = useAddToCart();
 
@@ -25,23 +27,23 @@ export default function ProductDetails() {
             />
             <Box>
                 <Typography variant="h4">
-                    {data.response.name || "No Name"}
+                    {data.response.name || t("productDetails.noName")}
                 </Typography>
                 <Typography variant="h5" color="primary" sx={{ marginTop: 2 }}>
-                    Price: {data.response.price}$
+                    {t("productDetails.price")}: {data.response.price}$
                 </Typography>
                 <Typography variant="body1" sx={{ marginTop: 1 }}>
-                    Rate: {data.response.rate} ⭐
+                    {t("productDetails.rate")}: {data.response.rate} ⭐
                 </Typography>
                 <Typography variant="body1" sx={{ marginTop: 1 }}>
-                    {data.response.description || "No Description"}
+                    {data.response.description || t("productDetails.noDescription")}
                 </Typography>
                 <Button
                     variant="contained"
                     sx={{ marginTop: 2 }}
                     onClick={() => addToCart({ productId: data.response.id, count: 1 })}
                 >
-                    Add to Cart
+                    {t("productDetails.addToCart")}
                 </Button>
             </Box>
         </Box>
