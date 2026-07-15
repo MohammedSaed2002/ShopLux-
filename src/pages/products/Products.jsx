@@ -9,12 +9,12 @@ import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
 import { useNavigate } from "react-router-dom"
 import useProducts from "../../hooks/useProducts"
-import useCartStore from "../../store/cartStore"
+import useAddToCart from "../../hooks/useAddToCart"
 
 export default function Products() {
 
     const { data, isLoading, isError } = useProducts();
-    const addToCart = useCartStore((state) => state.addToCart);
+    const { mutate: addToCart } = useAddToCart();
     const navigate = useNavigate();
 
     if (isLoading) return <CircularProgress />;
@@ -38,7 +38,10 @@ export default function Products() {
                         </Card>
                         <Button
                             variant="contained"
-                            onClick={() => addToCart({ id: product.id, image: product.image, name: product.name, price: product.price })}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                addToCart({ productId: product.id, count: 1 });
+                            }}
                         >
                             Add to Cart
                         </Button>
