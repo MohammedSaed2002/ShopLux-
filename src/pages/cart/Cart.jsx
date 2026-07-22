@@ -3,6 +3,7 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import CircularProgress from "@mui/material/CircularProgress"
 import IconButton from "@mui/material/IconButton"
+import Button from "@mui/material/Button"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
 import TableCell from "@mui/material/TableCell"
@@ -12,12 +13,14 @@ import TableRow from "@mui/material/TableRow"
 import AddIcon from "@mui/icons-material/Add"
 import RemoveIcon from "@mui/icons-material/Remove"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom"
 import useCart from "../../hooks/useCart"
 import useUpdateCartQty from "../../hooks/useUpdateCartQty"
 import useRemoveFromCart from "../../hooks/useRemoveFromCart"
 
 export default function Cart() {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const { data, isLoading } = useCart();
     const { mutate: updateQty } = useUpdateCartQty();
     const { mutate: removeItem } = useRemoveFromCart();
@@ -88,6 +91,16 @@ export default function Cart() {
                 <Typography variant="h6" sx={{ marginTop: 3 }}>
                     {t("cart.cartTotal")}: ${data.cartTotal}
                 </Typography>
+            )}
+
+            {data?.items?.length > 0 && (
+                <Button
+                    variant="contained"
+                    sx={{ marginTop: 3 }}
+                    onClick={() => navigate("/checkout")}
+                >
+                    {t("cart.checkoutButton")}
+                </Button>
             )}
         </Box>
     )

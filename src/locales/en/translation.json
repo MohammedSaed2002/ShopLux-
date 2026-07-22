@@ -16,7 +16,8 @@
     "actions": "Actions",
     "remove": "REMOVE",
     "cartTotal": "Cart Total",
-    "noName": "No Name"
+    "noName": "No Name",
+    "checkoutButton": "Checkout"
   },
   "products": {
     "title": "Products",
@@ -28,6 +29,17 @@
     "noName": "No Name",
     "noDescription": "No Description",
     "addToCart": "Add to Cart"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "cartTotal": "Cart Total",
+    "choosePayment": "Choose Payment Method",
+    "cash": "Cash",
+    "visa": "Visa",
+    "confirm": "Confirm Order",
+    "processing": "Processing...",
+    "success": "Order placed successfully!",
+    "error": "Something went wrong, please try again."
   },
   "auth": {
     "loginTitle": "Login",

@@ -16,7 +16,8 @@
     "actions": "إجراءات",
     "remove": "حذف",
     "cartTotal": "إجمالي السلة",
-    "noName": "بدون اسم"
+    "noName": "بدون اسم",
+    "checkoutButton": "إتمام الشراء"
   },
   "products": {
     "title": "المنتجات",
@@ -28,6 +29,17 @@
     "noName": "بدون اسم",
     "noDescription": "بدون وصف",
     "addToCart": "أضف إلى السلة"
+  },
+  "checkout": {
+    "title": "إتمام الشراء",
+    "cartTotal": "إجمالي السلة",
+    "choosePayment": "اختر طريقة الدفع",
+    "cash": "نقداً (كاش)",
+    "visa": "فيزا",
+    "confirm": "تأكيد الطلب",
+    "processing": "جارِ المعالجة...",
+    "success": "تم تنفيذ الطلب بنجاح!",
+    "error": "حدث خطأ ما، حاول من جديد."
   },
   "auth": {
     "loginTitle": "تسجيل الدخول",
