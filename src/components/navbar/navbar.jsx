@@ -28,6 +28,7 @@ export default function Navbar() {
         <li><Link to="/" style={styles.link}>{t("nav.home")}</Link></li>
         <li><Link to="/products" style={styles.link}>{t("nav.products")}</Link></li>
         <li><Link to="/cart" style={styles.link}>{t("nav.cart")}</Link></li>
+        <li><Link to="/profile" style={styles.link}>{t("nav.profile")}</Link></li>
       </ul>
 
       <div style={styles.buttons}>

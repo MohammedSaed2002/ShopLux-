@@ -5,7 +5,8 @@
     "cart": "السلة",
     "logout": "تسجيل خروج",
     "login": "تسجيل دخول",
-    "register": "إنشاء حساب"
+    "register": "إنشاء حساب",
+    "profile": "حسابي"
   },
   "cart": {
     "title": "السلة",
@@ -36,10 +37,32 @@
     "choosePayment": "اختر طريقة الدفع",
     "cash": "نقداً (كاش)",
     "visa": "فيزا",
+    "cardNumber": "رقم البطاقة",
+    "cardHolder": "اسم حامل البطاقة",
+    "expiryDate": "تاريخ الانتهاء (MM/YY)",
+    "cvv": "رمز التحقق CVV",
     "confirm": "تأكيد الطلب",
     "processing": "جارِ المعالجة...",
     "success": "تم تنفيذ الطلب بنجاح!",
     "error": "حدث خطأ ما، حاول من جديد."
+  },
+  "profile": {
+    "title": "حسابي",
+    "infoTab": "المعلومات",
+    "ordersTab": "الطلبات",
+    "fullName": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "phoneNumber": "رقم الهاتف",
+    "city": "المدينة",
+    "notProvided": "غير متوفر",
+    "orderId": "رقم الطلب",
+    "amountPaid": "المبلغ المدفوع",
+    "paymentStatus": "حالة الدفع",
+    "status": "الحالة",
+    "orderDate": "تاريخ الطلب",
+    "noOrders": "لا يوجد لديك أي طلبات بعد.",
+    "unpaid": "غير مدفوع",
+    "paid": "مدفوع"
   },
   "auth": {
     "loginTitle": "تسجيل الدخول",

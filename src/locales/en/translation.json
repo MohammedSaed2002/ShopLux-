@@ -5,7 +5,8 @@
     "cart": "Cart",
     "logout": "Logout",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "profile": "Profile"
   },
   "cart": {
     "title": "Cart",
@@ -36,10 +37,32 @@
     "choosePayment": "Choose Payment Method",
     "cash": "Cash",
     "visa": "Visa",
+    "cardNumber": "Card Number",
+    "cardHolder": "Card Holder Name",
+    "expiryDate": "Expiry Date (MM/YY)",
+    "cvv": "CVV",
     "confirm": "Confirm Order",
     "processing": "Processing...",
     "success": "Order placed successfully!",
     "error": "Something went wrong, please try again."
+  },
+  "profile": {
+    "title": "My Profile",
+    "infoTab": "Info",
+    "ordersTab": "Orders",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "city": "City",
+    "notProvided": "Not Provided",
+    "orderId": "Order ID",
+    "amountPaid": "Amount Paid",
+    "paymentStatus": "Payment Status",
+    "status": "Status",
+    "orderDate": "Order Date",
+    "noOrders": "You have no orders yet.",
+    "unpaid": "Unpaid",
+    "paid": "Paid"
   },
   "auth": {
     "loginTitle": "Login",
