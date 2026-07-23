@@ -18,8 +18,11 @@
     "remove": "حذف",
     "cartTotal": "إجمالي السلة",
     "noName": "بدون اسم",
-    "checkoutButton": "إتمام الشراء"
-  },
+    "checkoutButton": "إتمام الشراء",
+    "clearCart": "تفريغ السلة",
+    "emptyTitle": "سلتك فارغة",
+    "emptySubtitle": "يبدو أنك لم تضف أي شيء بعد."
+},
   "products": {
     "title": "المنتجات",
     "addToCart": "أضف إلى السلة"

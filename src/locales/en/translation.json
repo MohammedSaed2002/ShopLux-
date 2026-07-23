@@ -18,8 +18,11 @@
     "remove": "REMOVE",
     "cartTotal": "Cart Total",
     "noName": "No Name",
-    "checkoutButton": "Checkout"
-  },
+    "checkoutButton": "Checkout",
+    "clearCart": "Clear Cart",
+    "emptyTitle": "Your cart is empty",
+    "emptySubtitle": "Looks like you haven't added anything yet."
+},
   "products": {
     "title": "Products",
     "addToCart": "Add to Cart"
