@@ -25,15 +25,16 @@
 },
   "products": {
     "title": "Products",
-    "addToCart": "Add to Cart"
-  },
-  "productDetails": {
-    "price": "Price",
-    "rate": "Rate",
-    "noName": "No Name",
-    "noDescription": "No Description",
-    "addToCart": "Add to Cart"
-  },
+    "addToCart": "Add to Cart",
+    "sortBy": "Sort By",
+    "sortDefault": "Featured",
+    "sortNameAsc": "Name: A to Z",
+    "sortNameDesc": "Name: Z to A",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "sortRateAsc": "Rating: Low to High",
+    "sortRateDesc": "Rating: High to Low"
+},
   "checkout": {
     "title": "Checkout",
     "cartTotal": "Cart Total",

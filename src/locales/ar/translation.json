@@ -25,8 +25,16 @@
 },
   "products": {
     "title": "المنتجات",
-    "addToCart": "أضف إلى السلة"
-  },
+    "addToCart": "أضف إلى السلة",
+    "sortBy": "ترتيب حسب",
+    "sortDefault": "الافتراضي",
+    "sortNameAsc": "الاسم: أ - ي",
+    "sortNameDesc": "الاسم: ي - أ",
+    "sortPriceAsc": "السعر: من الأقل للأعلى",
+    "sortPriceDesc": "السعر: من الأعلى للأقل",
+    "sortRateAsc": "التقييم: من الأقل للأعلى",
+    "sortRateDesc": "التقييم: من الأعلى للأقل"
+},
   "productDetails": {
     "price": "السعر",
     "rate": "التقييم",

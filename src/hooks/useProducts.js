@@ -1,11 +1,16 @@
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
+import authAxiosInstance from "../api/authAxiosInstance"
 
-export default function useProducts() {
+export default function useProducts({ sortBy, ascending } = {}) {
     return useQuery({
-        queryKey: ["products"],
+        queryKey: ["products", sortBy, ascending],
         queryFn: async () => {
-            const response = await axios.get(`${import.meta.env.VITE_BURL}/Products`);
+            const response = await authAxiosInstance.get("/Products", {
+                params: {
+                    sortBy: sortBy || undefined,
+                    ascending: ascending,
+                }
+            });
             return response.data;
         }
     });
