@@ -5,6 +5,7 @@ import Cart from "./pages/cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
 import Profile from "./pages/profile/Profile"
 import Login from "./pages/login/Login"
+import ForgotPassword from "./pages/forgotPassword/ForgotPassword"
 import Products from "./pages/products/Products"
 import Register from "./pages/register/Register"
 import ProductDetails from "./pages/productDetails/ProductDetails"
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         {
             path: "login",
             element: <Login />
+        },
+        {
+            path: "forgot-password",
+            element: <ForgotPassword />
         },
         {
             path: "register",

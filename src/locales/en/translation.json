@@ -99,7 +99,23 @@
     "fullName": "Full Name",
     "phoneNumber": "Phone Number",
     "loginButton": "Login",
-    "registerButton": "Register"
+    "registerButton": "Register",
+    "forgotPasswordLink": "Forgot Password?"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "step1Description": "Enter your email address and we'll send you a code to reset your password.",
+    "sendCodeButton": "Send Code",
+    "sending": "Sending...",
+    "codeSentSuccess": "Code sent! Check your email.",
+    "step2Description": "Enter the code sent to your email along with your new password.",
+    "code": "Verification Code",
+    "newPassword": "New Password",
+    "resetButton": "Reset Password",
+    "resetting": "Resetting...",
+    "resetSuccess": "Password reset successfully! Redirecting to login...",
+    "error": "Something went wrong, please try again.",
+    "backToLogin": "Back to Login"
   },
   "common": {
     "loading": "Loading..."
