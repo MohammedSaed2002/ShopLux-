@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
+import authAxiosInstance from "../api/authAxiosInstance"
 
 export default function useProduct(id) {
     const getProduct = async () => {
-        const response = await axios.get(`${import.meta.env.VITE_BURL}/Products/${id}`);
+        const response = await authAxiosInstance.get(`/Products/${id}`);
         return response.data;
     }
 

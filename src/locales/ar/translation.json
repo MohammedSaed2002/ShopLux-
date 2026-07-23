@@ -22,7 +22,7 @@
     "clearCart": "تفريغ السلة",
     "emptyTitle": "سلتك فارغة",
     "emptySubtitle": "يبدو أنك لم تضف أي شيء بعد."
-},
+  },
   "products": {
     "title": "المنتجات",
     "addToCart": "أضف إلى السلة",
@@ -34,13 +34,26 @@
     "sortPriceDesc": "السعر: من الأعلى للأقل",
     "sortRateAsc": "التقييم: من الأقل للأعلى",
     "sortRateDesc": "التقييم: من الأعلى للأقل"
-},
+  },
   "productDetails": {
     "price": "السعر",
     "rate": "التقييم",
     "noName": "بدون اسم",
     "noDescription": "بدون وصف",
     "addToCart": "أضف إلى السلة"
+  },
+  "reviews": {
+    "title": "التقييمات",
+    "noReviews": "لا يوجد تقييمات بعد.",
+    "addReview": "أضف تقييمك",
+    "yourRating": "تقييمك",
+    "yourComment": "تعليقك",
+    "submit": "إرسال التقييم",
+    "submitting": "جارِ الإرسال...",
+    "success": "تم إضافة التقييم بنجاح!",
+    "loginToReview": "يرجى تسجيل الدخول لإضافة تقييم.",
+    "genericError": "تعذر إرسال التقييم. ربما قيّمت هذا المنتج من قبل، أو لم تشترِه بعد.",
+    "commentRequired": "التعليق مطلوب"
   },
   "checkout": {
     "title": "إتمام الشراء",
