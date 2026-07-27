@@ -4,32 +4,29 @@ export const getTheme = (mode) =>
   createTheme({
     palette: {
       mode: mode,
-      ...(mode === "light"
-        ? {
-            primary: {
-              main: "#1976d2",
-            },
-            background: {
-              default: "#f5f5f5",
-              paper: "#ffffff",
-            },
-            text: {
-              primary: "#111111",
-              secondary: "#555555",
-            },
-          }
-        : {
-            primary: {
-              main: "#00bcd4",
-            },
-            background: {
-              default: "#121212",
-              paper: "#1e1e1e",
-            },
-            text: {
-              primary: "#ffffff",
-              secondary: "#b0b0b0",
-            },
-          }),
+      primary: {
+        main: "#d2bcff",
+        dark: "#6c2bd9",
+      },
+      secondary: {
+        main: "#ffb68b",
+      },
+      background: {
+        default: mode === "dark" ? "#15121b" : "#f5f5f5",
+        paper: mode === "dark" ? "#211e28" : "#ffffff",
+      },
+      text: {
+        primary: mode === "dark" ? "#e7e0ee" : "#111111",
+        secondary: mode === "dark" ? "#ccc3d7" : "#555555",
+      },
+    },
+    typography: {
+      fontFamily: "Inter, Roboto, sans-serif",
+      h1: { fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 },
+      h2: { fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 },
+      h3: { fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 },
+    },
+    shape: {
+      borderRadius: 12,
     },
   });

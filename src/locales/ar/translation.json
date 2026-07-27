@@ -8,6 +8,20 @@
     "register": "إنشاء حساب",
     "profile": "حسابي"
   },
+  "home": {
+    "categoriesTitle": "عوالم مختارة",
+    "categoriesSubtitle": "استكشف أقسامنا المتخصصة",
+    "viewAll": "عرض الكل",
+    "heroLine1": "ارتقِ بأسلوب",
+    "heroLine2": "حياتك",
+    "heroDescription": "استمتع بمزيج من الجمال الفاخر والأداء المتطور. مجموعات مختارة لعشاق الجودة العصرية.",
+    "shopCollection": "تسوق المجموعة",
+    "featuredTitle": "الأكثر تميزاً",
+    "categoryElectronics": "إلكترونيات",
+    "categoryFashion": "أزياء",
+    "categoryHome": "منزل",
+    "categoryBeauty": "جمال"
+},
   "cart": {
     "title": "السلة",
     "productName": "اسم المنتج",
@@ -117,6 +131,23 @@
     "error": "حدث خطأ ما، حاول من جديد.",
     "backToLogin": "العودة لتسجيل الدخول"
   },
+  "footer": {
+    "brandDescription": "وجهتك الأولى لأسلوب الحياة الفاخر والتميز التقني.",
+    "collectionsTitle": "المجموعات",
+    "newArrivals": "وصل حديثاً",
+    "bestsellers": "الأكثر مبيعاً",
+    "limitedEditions": "إصدارات محدودة",
+    "sustainability": "الاستدامة",
+    "careTitle": "خدمة العملاء",
+    "shippingReturns": "الشحن والإرجاع",
+    "contactSupport": "الدعم الفني",
+    "privacyPolicy": "سياسة الخصوصية",
+    "aboutUs": "من نحن",
+    "newsletterTitle": "تابع آخر العروض",
+    "newsletterDescription": "انضم إلينا للحصول على عروض حصرية ومبكرة.",
+    "emailPlaceholder": "البريد الإلكتروني",
+    "copyright": "© 2024 ShopLux بريميوم. جميع الحقوق محفوظة."
+},
   "common": {
     "loading": "جارِ التحميل..."
   }

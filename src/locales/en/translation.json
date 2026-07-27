@@ -8,6 +8,20 @@
     "register": "Register",
     "profile": "Profile"
   },
+  "home": {
+    "categoriesTitle": "Curated Worlds",
+    "categoriesSubtitle": "Explore our specialized departments",
+    "viewAll": "View All",
+    "heroLine1": "Elevate Your",
+    "heroLine2": "Lifestyle",
+    "heroDescription": "Experience the fusion of high-end aesthetics and cutting-edge performance. Curated collections for the modern connoisseur.",
+    "shopCollection": "Shop Collection",
+    "featuredTitle": "Featured Selection",
+    "categoryElectronics": "Electronics",
+    "categoryFashion": "Fashion",
+    "categoryHome": "Home",
+    "categoryBeauty": "Beauty"
+},
   "cart": {
     "title": "Cart",
     "productName": "Product Name",
@@ -117,6 +131,23 @@
     "error": "Something went wrong, please try again.",
     "backToLogin": "Back to Login"
   },
+  "footer": {
+    "brandDescription": "The definitive destination for premium living and technological excellence.",
+    "collectionsTitle": "Collections",
+    "newArrivals": "New Arrivals",
+    "bestsellers": "Bestsellers",
+    "limitedEditions": "Limited Editions",
+    "sustainability": "Sustainability",
+    "careTitle": "Client Care",
+    "shippingReturns": "Shipping & Returns",
+    "contactSupport": "Contact Support",
+    "privacyPolicy": "Privacy Policy",
+    "aboutUs": "About Us",
+    "newsletterTitle": "Stay Updated",
+    "newsletterDescription": "Join our circle for exclusive early access.",
+    "emailPlaceholder": "Email address",
+    "copyright": "© 2024 ShopLux Premium. All rights reserved."
+},
   "common": {
     "loading": "Loading..."
   }
