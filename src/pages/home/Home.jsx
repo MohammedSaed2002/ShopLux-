@@ -7,10 +7,10 @@ import Pagination from "@mui/material/Pagination"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import useProducts from "../../hooks/useProducts"
-import electronicsIcon from "../../assets/icons/electronics.svg"
-import fashionIcon from "../../assets/icons/fashion.svg"
-import homeIcon from "../../assets/icons/home.svg"
-import beautyIcon from "../../assets/icons/beauty.svg"
+import electronicsIcon from "../../assets/icons/Electronics.svg"
+import fashionIcon from "../../assets/icons/Fashion.svg"
+import homeIcon from "../../assets/icons/Home.svg"
+import beautyIcon from "../../assets/icons/Beauty.svg"
 
 const categoryList = [
     { key: "categoryElectronics", colorFrom: "#0566d9", colorTo: "#d2bcff", icon: electronicsIcon, size: "30%" },
