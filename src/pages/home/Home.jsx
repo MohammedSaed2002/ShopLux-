@@ -13,10 +13,10 @@ import homeIcon from "../../assets/icons/Home.svg"
 import beautyIcon from "../../assets/icons/Beauty.svg"
 
 const categoryList = [
-    { key: "categoryElectronics", colorFrom: "#0566d9", colorTo: "#d2bcff", icon: electronicsIcon, size: "30%" },
-    { key: "categoryFashion", colorFrom: "#914200", colorTo: "#ffb68b", icon: fashionIcon, size: "100%" },
-    { key: "categoryHome", colorFrom: "#6c2bd9", colorTo: "#d2bcff", icon: homeIcon, size: "100%" },
-    { key: "categoryBeauty", colorFrom: "#93000a", colorTo: "#ffb4ab", icon: beautyIcon, size: "100%" },
+    { key: "categoryElectronics", colorFrom: "#0566d9", colorTo: "#d2bcff", icon: electronicsIcon, size: "40%" },
+    { key: "categoryFashion", colorFrom: "#914200", colorTo: "#ffb68b", icon: fashionIcon, size: "40%" },
+    { key: "categoryHome", colorFrom: "#6c2bd9", colorTo: "#d2bcff", icon: homeIcon, size: "40%" },
+    { key: "categoryBeauty", colorFrom: "#93000a", colorTo: "#ffb4ab", icon: beautyIcon, size: "40%" },
 ];
 
 const PRODUCTS_PER_PAGE = 4;
