@@ -126,7 +126,9 @@
     "rememberMe": "تذكرني",
     "dontHaveAccount": "ليس لديك حساب؟",
     "alreadyHaveAccount": "لديك حساب بالفعل؟",
-    "createAnAccount": "إنشاء حساب"
+    "createAnAccount": "إنشاء حساب",
+    "agreeToTerms": "أوافق على شروط الخدمة وسياسة الخصوصية.",
+    "registerNow": "إنشاء الحساب الآن"
 },
   "forgotPassword": {
     "title": "نسيت كلمة المرور",

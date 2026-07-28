@@ -126,7 +126,9 @@
     "rememberMe": "Remember me",
     "dontHaveAccount": "Don't have an account?",
     "alreadyHaveAccount": "Already have an account?",
-    "createAnAccount": "Create an Account"
+    "createAnAccount": "Create an Account",
+    "agreeToTerms": "I agree to the Terms of Service and Privacy Policy.",
+    "registerNow": "Register Now"   
 },
   "forgotPassword": {
     "title": "Forgot Password",
