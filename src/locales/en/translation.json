@@ -38,8 +38,9 @@
     "emptySubtitle": "Looks like you haven't added anything yet."
   },
   "products": {
-    "title": "Products",
-    "addToCart": "Add to Cart",
+    "title": "Premium Tech",
+    "subtitle": "Elevated essentials for the modern digital life.",
+    "addToCart": "Add",
     "sortBy": "Sort By",
     "sortDefault": "Featured",
     "sortNameAsc": "Name: A to Z",
@@ -47,8 +48,14 @@
     "sortPriceAsc": "Price: Low to High",
     "sortPriceDesc": "Price: High to Low",
     "sortRateAsc": "Rating: Low to High",
-    "sortRateDesc": "Rating: High to Low"
-  },
+    "sortRateDesc": "Rating: High to Low",
+    "searchPlaceholder": "Search collection...",
+    "ratingTitle": "Rating",
+    "priceTitle": "Price Range",
+    "andUp": "& Up",
+    "clearFilters": "Clear all filters",
+    "noResults": "No products match your filters."
+},
   "productDetails": {
     "price": "Price",
     "rate": "Rate",

@@ -9,6 +9,7 @@ export default function useProducts({ sortBy, ascending } = {}) {
                 params: {
                     sortBy: sortBy || undefined,
                     ascending: ascending,
+                    limit: 100,
                 }
             });
             return response.data;

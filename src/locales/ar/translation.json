@@ -38,8 +38,9 @@
     "emptySubtitle": "يبدو أنك لم تضف أي شيء بعد."
   },
   "products": {
-    "title": "المنتجات",
-    "addToCart": "أضف إلى السلة",
+    "title": "أحدث المنتجات",
+    "subtitle": "منتجات مختارة بعناية لأسلوب حياة عصري.",
+    "addToCart": "أضف",
     "sortBy": "ترتيب حسب",
     "sortDefault": "الافتراضي",
     "sortNameAsc": "الاسم: أ - ي",
@@ -47,8 +48,14 @@
     "sortPriceAsc": "السعر: من الأقل للأعلى",
     "sortPriceDesc": "السعر: من الأعلى للأقل",
     "sortRateAsc": "التقييم: من الأقل للأعلى",
-    "sortRateDesc": "التقييم: من الأعلى للأقل"
-  },
+    "sortRateDesc": "التقييم: من الأعلى للأقل",
+    "searchPlaceholder": "ابحث عن منتج...",
+    "ratingTitle": "التقييم",
+    "priceTitle": "نطاق السعر",
+    "andUp": "فأعلى",
+    "clearFilters": "مسح كل الفلاتر",
+    "noResults": "لا يوجد منتجات مطابقة للفلاتر."
+},
   "productDetails": {
     "price": "السعر",
     "rate": "التقييم",
