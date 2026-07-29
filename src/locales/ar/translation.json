@@ -61,8 +61,16 @@
     "rate": "التقييم",
     "noName": "بدون اسم",
     "noDescription": "بدون وصف",
-    "addToCart": "أضف إلى السلة"
-  },
+    "addToCart": "أضف إلى السلة",
+    "reviewsCount": "تقييم",
+    "expressDelivery": "توصيل سريع",
+    "warranty": "ضمان سنتين",
+    "tabDescription": "الوصف",
+    "tabSpecifications": "المواصفات",
+    "tabShipping": "الشحن",
+    "specificationsText": "المواصفات التفصيلية لهذا المنتج متوفرة عند التواصل مع خدمة العملاء.",
+    "shippingText": "الشحن العادي يستغرق 3-5 أيام عمل. تتوفر خيارات التوصيل السريع عند إتمام الطلب."
+},
   "reviews": {
     "title": "التقييمات",
     "noReviews": "لا يوجد تقييمات بعد.",

@@ -61,8 +61,16 @@
     "rate": "Rate",
     "noName": "No Name",
     "noDescription": "No Description",
-    "addToCart": "Add to Cart"
-  },
+    "addToCart": "Add to Cart",
+    "reviewsCount": "reviews",
+    "expressDelivery": "Express Delivery",
+    "warranty": "2 Year Warranty",
+    "tabDescription": "Description",
+    "tabSpecifications": "Specifications",
+    "tabShipping": "Shipping",
+    "specificationsText": "Detailed specifications for this product are available upon request through customer support.",
+    "shippingText": "Standard shipping takes 3-5 business days. Express delivery options are available at checkout."
+},
   "reviews": {
     "title": "Reviews",
     "noReviews": "No reviews yet.",
