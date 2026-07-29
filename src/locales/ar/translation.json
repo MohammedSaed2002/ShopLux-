@@ -23,7 +23,8 @@
     "categoryBeauty": "جمال"
 },
   "cart": {
-    "title": "السلة",
+    "title": "سلة التسوق",
+    "subtitle": "راجع المنتجات المختارة قبل إتمام الشراء.",
     "productName": "اسم المنتج",
     "price": "السعر",
     "quantity": "الكمية",
@@ -35,8 +36,16 @@
     "checkoutButton": "إتمام الشراء",
     "clearCart": "تفريغ السلة",
     "emptyTitle": "سلتك فارغة",
-    "emptySubtitle": "يبدو أنك لم تضف أي شيء بعد."
-  },
+    "emptySubtitle": "يبدو أنك لم تضف أي شيء بعد.",
+    "orderSummary": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "free": "مجاني",
+    "proceedToCheckout": "المتابعة للدفع",
+    "secureCheckout": "دفع آمن",
+    "secureNote": "معلومات الدفع الخاصة بك مشفرة وتتم معالجتها بأمان.",
+    "continueShopping": "متابعة التسوق"
+},
   "products": {
     "title": "أحدث المنتجات",
     "subtitle": "منتجات مختارة بعناية لأسلوب حياة عصري.",

@@ -23,7 +23,8 @@
     "categoryBeauty": "Beauty"
 },
   "cart": {
-    "title": "Cart",
+    "title": "Your Shopping Bag",
+    "subtitle": "Review your selected premium pieces before checkout.",
     "productName": "Product Name",
     "price": "Price",
     "quantity": "Quantity",
@@ -35,8 +36,16 @@
     "checkoutButton": "Checkout",
     "clearCart": "Clear Cart",
     "emptyTitle": "Your cart is empty",
-    "emptySubtitle": "Looks like you haven't added anything yet."
-  },
+    "emptySubtitle": "Looks like you haven't added anything yet.",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "FREE",
+    "proceedToCheckout": "Proceed to Checkout",
+    "secureCheckout": "Secure Checkout",
+    "secureNote": "Your payment information is encrypted and processed securely.",
+    "continueShopping": "Continue Shopping"
+},
   "products": {
     "title": "Premium Tech",
     "subtitle": "Elevated essentials for the modern digital life.",
