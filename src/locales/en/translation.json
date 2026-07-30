@@ -131,14 +131,16 @@
     "city": "City",
     "notProvided": "Not Provided",
     "orderId": "Order ID",
-    "amountPaid": "Amount Paid",
+    "amountPaid": "Total Amount",
     "paymentStatus": "Payment Status",
     "status": "Status",
-    "orderDate": "Order Date",
+    "orderDate": "Placed on",
     "noOrders": "You have no orders yet.",
     "unpaid": "Unpaid",
-    "paid": "Paid"
-  },
+    "paid": "Paid",
+    "accountSettings": "Account Settings",
+    "orderHistory": "My Order History"
+},
   "auth": {
     "loginTitle": "Login",
     "registerTitle": "Register",

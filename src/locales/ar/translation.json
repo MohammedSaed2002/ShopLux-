@@ -131,14 +131,16 @@
     "city": "المدينة",
     "notProvided": "غير متوفر",
     "orderId": "رقم الطلب",
-    "amountPaid": "المبلغ المدفوع",
+    "amountPaid": "المبلغ الإجمالي",
     "paymentStatus": "حالة الدفع",
     "status": "الحالة",
     "orderDate": "تاريخ الطلب",
     "noOrders": "لا يوجد لديك أي طلبات بعد.",
     "unpaid": "غير مدفوع",
-    "paid": "مدفوع"
-  },
+    "paid": "مدفوع",
+    "accountSettings": "إعدادات الحساب",
+    "orderHistory": "سجل طلباتي"
+},
   "auth": {
     "loginTitle": "تسجيل الدخول",
     "registerTitle": "إنشاء حساب",
