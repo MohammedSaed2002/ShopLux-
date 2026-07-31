@@ -102,6 +102,7 @@ export default function Login() {
                             variant="outlined"
                             error={!!errors.email}
                             helperText={errors.email?.message}
+                            autoComplete="new-email"
                         />
                         <TextField
                             fullWidth
@@ -111,6 +112,7 @@ export default function Login() {
                             variant="outlined"
                             error={!!errors.password}
                             helperText={errors.password?.message}
+                            autoComplete="new-password"
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
