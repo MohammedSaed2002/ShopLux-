@@ -13,7 +13,7 @@ import homeIcon from "../../assets/icons/Home.svg"
 import beautyIcon from "../../assets/icons/Beauty.svg"
 
 const categoryList = [
-    { key: "categoryElectronics", colorFrom: "#0566d9", colorTo: "#d2bcff", icon: electronicsIcon, size: "40%" },
+    { key: "categoryElectronics", colorFrom: "#0566d9", colorTo: "#d2bcff", icon: electronicsIcon, size: "30%" },
     { key: "categoryFashion", colorFrom: "#914200", colorTo: "#ffb68b", icon: fashionIcon, size: "40%" },
     { key: "categoryHome", colorFrom: "#6c2bd9", colorTo: "#d2bcff", icon: homeIcon, size: "40%" },
     { key: "categoryBeauty", colorFrom: "#93000a", colorTo: "#ffb4ab", icon: beautyIcon, size: "40%" },
@@ -40,24 +40,24 @@ export default function Home() {
             <Box
                 sx={{
                     background: "linear-gradient(147deg, #6c2bd9 0%, #3e008e 50%, #100d16 100%)",
-                    padding: { xs: 4, md: 10 },
+                    padding: { xs: 3, sm: 4, md: 10 },
                     display: "flex",
                     flexWrap: "wrap",
                     alignItems: "center",
                     gap: 6,
                 }}
             >
-                <Box sx={{ flex: 1, minWidth: 280 }}>
-                    <Typography variant="h3" sx={{ color: "#dac7ff" }}>
+                <Box sx={{ flex: 1, minWidth: { xs: "100%", sm: 280 } }}>
+                    <Typography sx={{ color: "#dac7ff", fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" }, fontWeight: "bold" }}>
                         {t("home.heroLine1")}
                     </Typography>
-                    <Typography variant="h3" sx={{ color: "#ffb68b", marginBottom: 2 }}>
+                    <Typography sx={{ color: "#ffb68b", fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" }, fontWeight: "bold", marginBottom: 2 }}>
                         {t("home.heroLine2")}
                     </Typography>
-                    <Typography sx={{ color: "rgba(218,199,255,0.8)", maxWidth: 450, marginBottom: 3 }}>
+                    <Typography sx={{ color: "rgba(218,199,255,0.8)", maxWidth: 450, marginBottom: 3, fontSize: { xs: "0.9rem", md: "1rem" } }}>
                         {t("home.heroDescription")}
                     </Typography>
-                    <Box sx={{ display: "flex", gap: 2 }}>
+                    <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
                         <Button
                             variant="contained"
                             sx={{
@@ -86,8 +86,8 @@ export default function Home() {
             </Box>
 
             {/* Categories Section */}
-            <Box sx={{ padding: { xs: 4, md: 10 } }}>
-                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 4 }}>
+            <Box sx={{ padding: { xs: 3, sm: 4, md: 10 } }}>
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 2, marginBottom: 4 }}>
                     <Box>
                         <Typography variant="h6">{t("home.categoriesTitle")}</Typography>
                         <Typography color="text.secondary">{t("home.categoriesSubtitle")}</Typography>
@@ -95,7 +95,7 @@ export default function Home() {
                     <Button onClick={() => navigate("/products")}>{t("home.viewAll")}</Button>
                 </Box>
 
-                <Box sx={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
+                <Box sx={{ display: "flex", gap: { xs: 3, md: 5 }, flexWrap: "wrap", justifyContent: { xs: "center", md: "flex-start" } }}>
                     {categoryList.map((cat) => (
                         <Box
                             key={cat.key}
@@ -112,8 +112,8 @@ export default function Home() {
                         >
                             <Box
                                 sx={{
-                                    width: 160,
-                                    height: 160,
+                                    width: { xs: 110, sm: 140, md: 160 },
+                                    height: { xs: 110, sm: 140, md: 160 },
                                     borderRadius: "50%",
                                     padding: "8px",
                                     background: `linear-gradient(45deg, ${cat.colorFrom} 0%, ${cat.colorTo} 100%)`,
@@ -122,32 +122,34 @@ export default function Home() {
                                     justifyContent: "center",
                                 }}
                             >
-                              <Box
-                                  sx={{
-                                      width: "100%",
-                                      height: "100%",
-                                      borderRadius: "50%",
-                                      backgroundColor: "background.default",
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                  }}
-                              >
-                                  <Box
+                                <Box
+                                    sx={{
+                                        width: "100%",
+                                        height: "100%",
+                                        borderRadius: "50%",
+                                        backgroundColor: "background.default",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    <Box
                                         component="img"
                                         src={cat.icon}
                                         sx={{ width: cat.size, height: cat.size }}
                                     />
-                              </Box>
+                                </Box>
                             </Box>
-                            <Typography>{t(`home.${cat.key}`)}</Typography>
+                            <Typography sx={{ fontSize: { xs: "0.85rem", md: "1rem" } }}>
+                                {t(`home.${cat.key}`)}
+                            </Typography>
                         </Box>
                     ))}
                 </Box>
             </Box>
 
             {/* Featured Products Section */}
-            <Box sx={{ backgroundColor: "background.paper", padding: { xs: 4, md: 10 } }}>
+            <Box sx={{ backgroundColor: "background.paper", padding: { xs: 3, sm: 4, md: 10 } }}>
                 <Typography variant="h6" sx={{ marginBottom: 4 }}>
                     {t("home.featuredTitle")}
                 </Typography>
@@ -156,13 +158,14 @@ export default function Home() {
                     <CircularProgress />
                 ) : (
                     <>
-                        <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
+                        <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap", justifyContent: { xs: "center", sm: "flex-start" } }}>
                             {currentProducts.map((product) => (
                                 <Box
                                     key={product.id}
                                     sx={{
                                         flex: "0 1 260px",
-                                        maxWidth: 260,
+                                        width: { xs: "100%", sm: "auto" },
+                                        maxWidth: { xs: 320, sm: 260 },
                                         backgroundColor: "background.default",
                                         borderRadius: 3,
                                         border: "1px solid",
