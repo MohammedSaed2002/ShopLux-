@@ -21,7 +21,7 @@
     "categoryFashion": "Fashion",
     "categoryHome": "Home",
     "categoryBeauty": "Beauty"
-},
+  },
   "cart": {
     "title": "Your Shopping Bag",
     "subtitle": "Review your selected premium pieces before checkout.",
@@ -45,7 +45,7 @@
     "secureCheckout": "Secure Checkout",
     "secureNote": "Your payment information is encrypted and processed securely.",
     "continueShopping": "Continue Shopping"
-},
+  },
   "products": {
     "title": "Premium Tech",
     "subtitle": "Elevated essentials for the modern digital life.",
@@ -63,8 +63,10 @@
     "priceTitle": "Price Range",
     "andUp": "& Up",
     "clearFilters": "Clear all filters",
-    "noResults": "No products match your filters."
-},
+    "noResults": "No products match your filters.",
+    "addedToCart": "Added to cart!",
+    "addToCartError": "Could not add this product to your cart. Please try again."
+  },
   "productDetails": {
     "price": "Price",
     "rate": "Rate",
@@ -78,8 +80,13 @@
     "tabSpecifications": "Specifications",
     "tabShipping": "Shipping",
     "specificationsText": "Detailed specifications for this product are available upon request through customer support.",
-    "shippingText": "Standard shipping takes 3-5 business days. Express delivery options are available at checkout."
-},
+    "shippingText": "Standard shipping takes 3-5 business days. Express delivery options are available at checkout.",
+    "loadErrorTitle": "Product not found",
+    "loadErrorSubtitle": "This product may have been removed or the link is broken.",
+    "backToProducts": "Back to Products",
+    "addedToCart": "Added to cart!",
+    "addToCartError": "Could not add this product to your cart. Please try again."
+  },
   "reviews": {
     "title": "Reviews",
     "noReviews": "No reviews yet.",
@@ -91,7 +98,8 @@
     "success": "Review added successfully!",
     "loginToReview": "Please log in to write a review.",
     "genericError": "Could not submit review. You may have already reviewed this product, or haven't purchased it yet.",
-    "commentRequired": "Comment is required"
+    "commentRequired": "Comment is required",
+    "ratingRequired": "Please select a rating before submitting."
   },
   "checkout": {
     "title": "Secure Checkout",
@@ -120,7 +128,7 @@
     "secureTransaction": "Encrypted Secure Transaction",
     "success": "Order placed successfully!",
     "error": "Something went wrong, please try again."
-},
+  },
   "profile": {
     "title": "My Profile",
     "infoTab": "Info",
@@ -140,7 +148,7 @@
     "paid": "Paid",
     "accountSettings": "Account Settings",
     "orderHistory": "My Order History"
-},
+  },
   "auth": {
     "loginTitle": "Login",
     "registerTitle": "Register",
@@ -167,8 +175,12 @@
     "alreadyHaveAccount": "Already have an account?",
     "createAnAccount": "Create an Account",
     "agreeToTerms": "I agree to the Terms of Service and Privacy Policy.",
-    "registerNow": "Register Now"   
-},
+    "registerNow": "Register Now",
+    "loginError": "Invalid email or password. Please try again.",
+    "loggingIn": "Signing in...",
+    "registerError": "Something went wrong while creating your account. Please try again.",
+    "registering": "Creating account..."
+  },
   "forgotPassword": {
     "title": "Forgot Password",
     "step1Description": "Enter your email address and we'll send you a code to reset your password.",
@@ -200,7 +212,7 @@
     "newsletterDescription": "Join our circle for exclusive early access.",
     "emailPlaceholder": "Email address",
     "copyright": "© 2024 ShopLux Premium. All rights reserved."
-},
+  },
   "common": {
     "loading": "Loading..."
   }

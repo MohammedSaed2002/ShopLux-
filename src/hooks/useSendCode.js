@@ -1,10 +1,10 @@
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useSendCode() {
     return useMutation({
         mutationFn: async (email) => {
-            return await axios.post(`${import.meta.env.VITE_BURL}/auth/Account/SendCode`, { email });
+            return await axiosInstance.post("/auth/Account/SendCode", { email });
         },
     });
 }

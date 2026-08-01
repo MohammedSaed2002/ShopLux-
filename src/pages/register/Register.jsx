@@ -8,14 +8,15 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Alert from '@mui/material/Alert';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
-import axios from 'axios';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../store/useAuthStore';
 import { useTranslation } from 'react-i18next';
+import axiosInstance from '../../api/axiosInstance';
 
 export default function Register() {
 
@@ -24,11 +25,13 @@ export default function Register() {
     const setToken = useAuthStore((state) => state.setToken);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [registerError, setRegisterError] = useState("");
 
     const registerSchema = yup.object({
-        userName: yup.string().required(),
+        userName: yup.string().required().min(3).max(20),
         fullName: yup.string().required(),
-        email: yup.string().required(),
+        email: yup.string().email().required(),
         phoneNumber: yup.string().required(),
         password: yup.string().required(),
         confirmPassword: yup.string()
@@ -41,13 +44,18 @@ export default function Register() {
     });
 
     const RegisterForm = async (data) => {
+        setRegisterError("");
+        setIsSubmitting(true);
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BURL}/auth/Account/Register`, data);
+            const response = await axiosInstance.post("/auth/Account/Register", data);
             const token = response.data.accessToken || response.data.token;
             setToken(token);
             navigate("/");
         } catch (err) {
-            console.log(err);
+            const serverMessage = err?.response?.data?.message;
+            setRegisterError(serverMessage || t("auth.registerError"));
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
@@ -177,16 +185,19 @@ export default function Register() {
                             label={t("auth.agreeToTerms")}
                         />
 
+                        {registerError && <Alert severity="error">{registerError}</Alert>}
+
                         <Button
                             variant="contained"
                             type="submit"
+                            disabled={isSubmitting}
                             sx={{
                                 background: 'linear-gradient(135deg, #6c2bd9 0%, #d2bcff 100%)',
                                 padding: 1.5,
                                 borderRadius: 2,
                             }}
                         >
-                            {t("auth.registerNow")}
+                            {isSubmitting ? t("auth.registering") : t("auth.registerNow")}
                         </Button>
                     </Box>
 

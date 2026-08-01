@@ -15,7 +15,10 @@ import Slider from "@mui/material/Slider"
 import Divider from "@mui/material/Divider"
 import Button from "@mui/material/Button"
 import Pagination from "@mui/material/Pagination"
+import Snackbar from "@mui/material/Snackbar"
+import Alert from "@mui/material/Alert"
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
+import FavoriteIcon from "@mui/icons-material/Favorite"
 import StarIcon from "@mui/icons-material/Star"
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
 import { useNavigate } from "react-router-dom"
@@ -45,6 +48,8 @@ export default function Products() {
     const [minRating, setMinRating] = useState(0);
     const [priceRange, setPriceRange] = useState([0, 5000]);
     const [page, setPage] = useState(1);
+    const [favorites, setFavorites] = useState({});
+    const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
 
     const currentSortOption = SORT_OPTIONS.find(opt => opt.value === selectedSort) || SORT_OPTIONS[0];
 
@@ -77,6 +82,24 @@ export default function Products() {
         setPriceRange([0, 5000]);
         setSelectedSort("");
         setPage(1);
+    };
+
+    const toggleFavorite = (productId) => {
+        setFavorites((prev) => ({ ...prev, [productId]: !prev[productId] }));
+    };
+
+    const handleAddToCart = (productId) => {
+        addToCart(
+            { productId, count: 1 },
+            {
+                onSuccess: () => {
+                    setSnackbar({ open: true, message: t("products.addedToCart"), severity: "success" });
+                },
+                onError: () => {
+                    setSnackbar({ open: true, message: t("products.addToCartError"), severity: "error" });
+                },
+            }
+        );
     };
 
     if (isLoading) return <CircularProgress sx={{ margin: 4 }} />;
@@ -205,9 +228,16 @@ export default function Products() {
                                                 padding: 1,
                                                 display: "flex",
                                             }}
-                                            onClick={(e) => e.stopPropagation()}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleFavorite(product.id);
+                                            }}
                                         >
-                                            <FavoriteBorderIcon sx={{ color: "#fff" }} fontSize="small" />
+                                            {favorites[product.id] ? (
+                                                <FavoriteIcon sx={{ color: "#ffb68b" }} fontSize="small" />
+                                            ) : (
+                                                <FavoriteBorderIcon sx={{ color: "#fff" }} fontSize="small" />
+                                            )}
                                         </Box>
                                     </Box>
 
@@ -232,7 +262,7 @@ export default function Products() {
                                                 }}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    addToCart({ productId: product.id, count: 1 });
+                                                    handleAddToCart(product.id);
                                                 }}
                                             >
                                                 {t("products.addToCart")}
@@ -256,6 +286,21 @@ export default function Products() {
                     )}
                 </Box>
             </Box>
+
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={3000}
+                onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert
+                    onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+                    severity={snackbar.severity}
+                    sx={{ width: '100%' }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

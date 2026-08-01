@@ -6,14 +6,15 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Alert from '@mui/material/Alert';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
-import axios from 'axios';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useAuthStore from '../../store/useAuthStore';
+import axiosInstance from '../../api/axiosInstance';
 
 export default function Login() {
 
@@ -21,6 +22,8 @@ export default function Login() {
     const { t } = useTranslation();
     const setToken = useAuthStore((state) => state.setToken);
     const [showPassword, setShowPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [loginError, setLoginError] = useState("");
 
     const loginSchema = yup.object({
         email: yup.string().email().required(),
@@ -32,13 +35,18 @@ export default function Login() {
     });
 
     const LoginForm = async (data) => {
+        setLoginError("");
+        setIsSubmitting(true);
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BURL}/auth/Account/Login`, data);
+            const response = await axiosInstance.post("/auth/Account/Login", data);
             const token = response.data.accessToken;
             setToken(token);
             navigate("/");
         } catch (err) {
-            console.log(err);
+            const serverMessage = err?.response?.data?.message;
+            setLoginError(serverMessage || t("auth.loginError"));
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
@@ -134,16 +142,19 @@ export default function Login() {
                             </Typography>
                         </Box>
 
+                        {loginError && <Alert severity="error">{loginError}</Alert>}
+
                         <Button
                             variant="contained"
                             type="submit"
+                            disabled={isSubmitting}
                             sx={{
                                 background: 'linear-gradient(135deg, #6c2bd9 0%, #3e008e 100%)',
                                 padding: 1.5,
                                 borderRadius: 2,
                             }}
                         >
-                            {t("auth.loginButton")}
+                            {isSubmitting ? t("auth.loggingIn") : t("auth.loginButton")}
                         </Button>
                     </Box>
 

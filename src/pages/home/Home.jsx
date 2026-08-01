@@ -78,6 +78,7 @@ export default function Home() {
                                 borderRadius: 8,
                                 "&:hover": { borderColor: "#fff", backgroundColor: "rgba(255,255,255,0.1)" },
                             }}
+                            onClick={() => navigate("/products")}
                         >
                             {t("home.viewAll")}
                         </Button>

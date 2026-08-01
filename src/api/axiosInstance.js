@@ -1,10 +1,13 @@
 import axios from "axios";
+import i18n from "../i18n";
 
 const axiosInstance = axios.create({
-baseURL:`${import.meta.env.VITE_BURL}/`,
-    headers:{
-        "Accept-Language":"en"
-    }
+    baseURL: `${import.meta.env.VITE_BURL}`,
+});
+
+axiosInstance.interceptors.request.use((config) => {
+    config.headers["Accept-Language"] = i18n.language || "en";
+    return config;
 });
 
 export default axiosInstance;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField'
 import Alert from '@mui/material/Alert'
 import Divider from '@mui/material/Divider'
 import Avatar from '@mui/material/Avatar'
+import Snackbar from '@mui/material/Snackbar'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
@@ -23,8 +24,9 @@ import useAuthStore from '../../store/useAuthStore'
 export default function ProductDetails() {
     const { id } = useParams();
     const { t } = useTranslation();
-    const { data, isLoading } = useProduct(id);
-    const { mutate: addToCart } = useAddToCart();
+    const navigate = useNavigate();
+    const { data, isLoading, isError } = useProduct(id);
+    const { mutate: addToCart, isPending: isAddingToCart } = useAddToCart();
     const { mutate: addReview, isPending, isSuccess, error } = useAddReview(id);
     const token = useAuthStore((state) => state.token);
 
@@ -33,9 +35,27 @@ export default function ProductDetails() {
     const [newRating, setNewRating] = useState(0);
     const [newComment, setNewComment] = useState("");
     const [commentError, setCommentError] = useState("");
+    const [ratingError, setRatingError] = useState("");
     const [mainImage, setMainImage] = useState(null);
+    const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
 
     if (isLoading) return <CircularProgress sx={{ margin: 4 }} />
+
+    if (isError || !data?.response) {
+        return (
+            <Box sx={{ padding: 4, textAlign: "center", marginTop: 6 }}>
+                <Typography variant="h5" sx={{ marginBottom: 1 }}>
+                    {t("productDetails.loadErrorTitle")}
+                </Typography>
+                <Typography color="text.secondary" sx={{ marginBottom: 3 }}>
+                    {t("productDetails.loadErrorSubtitle")}
+                </Typography>
+                <Button variant="contained" onClick={() => navigate("/products")}>
+                    {t("productDetails.backToProducts")}
+                </Button>
+            </Box>
+        );
+    }
 
     const product = data.response;
 
@@ -46,14 +66,38 @@ export default function ProductDetails() {
 
     const currentMainImage = mainImage || product.image;
 
+    const handleAddToCart = () => {
+        addToCart(
+            { productId: product.id, count: quantity },
+            {
+                onSuccess: () => {
+                    setSnackbar({ open: true, message: t("productDetails.addedToCart"), severity: "success" });
+                },
+                onError: () => {
+                    setSnackbar({ open: true, message: t("productDetails.addToCartError"), severity: "error" });
+                },
+            }
+        );
+    };
+
     const handleSubmitReview = () => {
+        let hasError = false;
+        if (!newRating) {
+            setRatingError(t("reviews.ratingRequired"));
+            hasError = true;
+        } else {
+            setRatingError("");
+        }
         if (!newComment.trim()) {
             setCommentError(t("reviews.commentRequired"));
-            return;
+            hasError = true;
+        } else {
+            setCommentError("");
         }
-        setCommentError("");
+        if (hasError) return;
+
         addReview(
-            { rating: newRating || 5, comment: newComment },
+            { rating: newRating, comment: newComment },
             {
                 onSuccess: () => {
                     setNewComment("");
@@ -141,15 +185,16 @@ export default function ProductDetails() {
 
                         <Button
                             variant="contained"
+                            disabled={isAddingToCart}
                             sx={{
                                 flex: 1,
                                 background: 'linear-gradient(135deg, #6c2bd9 0%, #3e008e 100%)',
                                 padding: 1.5,
                                 borderRadius: 8,
                             }}
-                            onClick={() => addToCart({ productId: product.id, count: quantity })}
+                            onClick={handleAddToCart}
                         >
-                            {t("productDetails.addToCart")}
+                            {isAddingToCart ? t("checkout.processing") : t("productDetails.addToCart")}
                         </Button>
                     </Box>
 
@@ -282,7 +327,20 @@ export default function ProductDetails() {
                             <Alert severity="info">{t("reviews.loginToReview")}</Alert>
                         ) : (
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                <Rating value={newRating} onChange={(e, value) => setNewRating(value)} />
+                                <Box>
+                                    <Rating
+                                        value={newRating}
+                                        onChange={(e, value) => {
+                                            setNewRating(value);
+                                            if (value) setRatingError("");
+                                        }}
+                                    />
+                                    {ratingError && (
+                                        <Typography variant="caption" color="error" sx={{ display: 'block' }}>
+                                            {ratingError}
+                                        </Typography>
+                                    )}
+                                </Box>
                                 <TextField
                                     multiline
                                     rows={3}
@@ -309,6 +367,21 @@ export default function ProductDetails() {
                     </Box>
                 </Box>
             </Box>
+
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={3000}
+                onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert
+                    onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+                    severity={snackbar.severity}
+                    sx={{ width: '100%' }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }
