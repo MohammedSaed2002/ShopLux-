@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
@@ -18,7 +18,7 @@ export default function ForgotPassword() {
     const [code, setCode] = useState("");
     const [newPassword, setNewPassword] = useState("");
 
-    const { mutate: sendCode, isPending: isSending, isSuccess: codeSent, error: sendError } = useSendCode();
+    const { mutate: sendCode, isPending: isSending, error: sendError } = useSendCode();
     const { mutate: resetPassword, isPending: isResetting, isSuccess: resetSuccess, error: resetError } = useResetPassword();
 
     const handleSendCode = (e) => {

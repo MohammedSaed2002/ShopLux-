@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import { useState, useMemo } from "react"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import CircularProgress from "@mui/material/CircularProgress"
@@ -58,17 +58,15 @@ export default function Products() {
         ascending: currentSortOption.ascending,
     });
 
-    const allProducts = data?.response?.data || [];
-
-    // filter products (search, rating, price) - all done in the browser
     const filteredProducts = useMemo(() => {
-        return allProducts.filter((product) => {
-            const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
-            const matchesRating = product.rate >= minRating;
-            const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
-            return matchesSearch && matchesRating && matchesPrice;
-        });
-    }, [allProducts, search, minRating, priceRange]);
+    const allProducts = data?.response?.data || [];
+    return allProducts.filter((product) => {
+        const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
+        const matchesRating = product.rate >= minRating;
+        const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
+        return matchesSearch && matchesRating && matchesPrice;
+    });
+    }, [data, search, minRating, priceRange]);
 
     const pageCount = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
     const currentProducts = filteredProducts.slice(

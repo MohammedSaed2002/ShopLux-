@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { getTheme } from "../theme";
 import createEmotionCache from "../createEmotionCache";
 
-const ThemeContext = createContext();
+import { ThemeContext } from "./themeContextInstance";
 
 export function ThemeProvider({ children }) {
     const { i18n } = useTranslation();
@@ -40,4 +40,3 @@ export function ThemeProvider({ children }) {
     );
 }
 
-export const useThemeMode = () => useContext(ThemeContext);

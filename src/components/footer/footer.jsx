@@ -1,27 +1,74 @@
-import React from "react"
+import { useState } from "react"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import IconButton from "@mui/material/IconButton"
+import Snackbar from "@mui/material/Snackbar"
+import Alert from "@mui/material/Alert"
 import SendIcon from "@mui/icons-material/Send"
+import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+
+const ROUTE_MAP = {
+    newArrivals: "/products",
+    bestsellers: "/products",
+    limitedEditions: "/products",
+};
 
 export default function Footer() {
     const { t } = useTranslation();
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [subscribed, setSubscribed] = useState(false);
 
     const collectionsLinks = [
-        t("footer.newArrivals"),
-        t("footer.bestsellers"),
-        t("footer.limitedEditions"),
-        t("footer.sustainability"),
+        { key: "newArrivals", label: t("footer.newArrivals") },
+        { key: "bestsellers", label: t("footer.bestsellers") },
+        { key: "limitedEditions", label: t("footer.limitedEditions") },
+        { key: "sustainability", label: t("footer.sustainability") },
     ];
 
     const careLinks = [
-        t("footer.shippingReturns"),
-        t("footer.contactSupport"),
-        t("footer.privacyPolicy"),
-        t("footer.aboutUs"),
+        { key: "shippingReturns", label: t("footer.shippingReturns") },
+        { key: "contactSupport", label: t("footer.contactSupport") },
+        { key: "privacyPolicy", label: t("footer.privacyPolicy") },
+        { key: "aboutUs", label: t("footer.aboutUs") },
     ];
+
+    const renderLink = (item) => {
+        const route = ROUTE_MAP[item.key];
+        return (
+            <Typography
+                key={item.key}
+                component="span"
+                role={route ? "button" : undefined}
+                tabIndex={route ? 0 : undefined}
+                onClick={route ? () => navigate(route) : undefined}
+                onKeyDown={route ? (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        navigate(route);
+                    }
+                } : undefined}
+                color="text.secondary"
+                sx={{
+                    display: "block",
+                    marginBottom: 1,
+                    cursor: "pointer",
+                    transition: "color 0.2s",
+                    "&:hover": { color: "primary.main" },
+                }}
+            >
+                {item.label}
+            </Typography>
+        );
+    };
+
+    const handleSubscribe = () => {
+        if (!email.trim()) return;
+        setSubscribed(true);
+        setEmail("");
+    };
 
     return (
         <Box component="footer" sx={{ backgroundColor: "background.default", borderTop: "1px solid", borderColor: "divider" }}>
@@ -39,40 +86,14 @@ export default function Footer() {
                     <Typography sx={{ fontWeight: "bold", marginBottom: 2 }}>
                         {t("footer.collectionsTitle")}
                     </Typography>
-                    {collectionsLinks.map((link) => (
-                        <Typography
-                            key={link}
-                            color="text.secondary"
-                            sx={{
-                                marginBottom: 1,
-                                cursor: "pointer",
-                                transition: "color 0.2s",
-                                "&:hover": { color: "primary.main" },
-                            }}
-                        >
-                            {link}
-                        </Typography>
-                    ))}
+                    {collectionsLinks.map(renderLink)}
                 </Box>
 
                 <Box sx={{ flex: "1 1 160px" }}>
                     <Typography sx={{ fontWeight: "bold", marginBottom: 2 }}>
                         {t("footer.careTitle")}
                     </Typography>
-                    {careLinks.map((link) => (
-                        <Typography
-                            key={link}
-                            color="text.secondary"
-                            sx={{
-                                marginBottom: 1,
-                                cursor: "pointer",
-                                transition: "color 0.2s",
-                                "&:hover": { color: "primary.main" },
-                            }}
-                        >
-                            {link}
-                        </Typography>
-                    ))}
+                    {careLinks.map(renderLink)}
                 </Box>
 
                 <Box sx={{ flex: "1 1 220px" }}>
@@ -85,10 +106,17 @@ export default function Footer() {
                     <Box sx={{ display: "flex", gap: 1 }}>
                         <TextField
                             size="small"
+                            type="email"
                             placeholder={t("footer.emailPlaceholder")}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && handleSubscribe()}
                             fullWidth
                         />
-                        <IconButton sx={{ backgroundColor: "primary.dark", color: "#fff", "&:hover": { backgroundColor: "primary.main" } }}>
+                        <IconButton
+                            onClick={handleSubscribe}
+                            sx={{ backgroundColor: "primary.dark", color: "#fff", "&:hover": { backgroundColor: "primary.main" } }}
+                        >
                             <SendIcon fontSize="small" />
                         </IconButton>
                     </Box>
@@ -100,6 +128,17 @@ export default function Footer() {
                     {t("footer.copyright")}
                 </Typography>
             </Box>
+
+            <Snackbar
+                open={subscribed}
+                autoHideDuration={3000}
+                onClose={() => setSubscribed(false)}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            >
+                <Alert onClose={() => setSubscribed(false)} severity="success" sx={{ width: "100%" }}>
+                    {t("footer.newsletterTitle")}
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

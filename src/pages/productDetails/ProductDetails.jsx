@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'

@@ -1,15 +1,32 @@
+/* eslint-disable react-refresh/only-export-components */
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import MainLayout from "./layout/mainlayout"
-import Home from "./pages/home/Home"
-import Cart from "./pages/cart/Cart"
-import Checkout from "./pages/checkout/Checkout"
-import Profile from "./pages/profile/Profile"
-import Login from "./pages/login/Login"
-import ForgotPassword from "./pages/forgotPassword/ForgotPassword"
-import Products from "./pages/products/Products"
-import Register from "./pages/register/Register"
-import ProductDetails from "./pages/productDetails/ProductDetails"
-import ProtectedRouter from "./components/ProtectedRouter/ProtectedRouter"
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import MainLayout from "./layout/mainlayout";
+import ProtectedRouter from "./components/ProtectedRouter/ProtectedRouter";
+
+const Home = lazy(() => import("./pages/home/Home"));
+const Cart = lazy(() => import("./pages/cart/Cart"));
+const Checkout = lazy(() => import("./pages/checkout/Checkout"));
+const Profile = lazy(() => import("./pages/profile/Profile"));
+const Login = lazy(() => import("./pages/login/Login"));
+const ForgotPassword = lazy(() => import("./pages/forgotPassword/ForgotPassword"));
+const Products = lazy(() => import("./pages/products/Products"));
+const Register = lazy(() => import("./pages/register/Register"));
+const ProductDetails = lazy(() => import("./pages/productDetails/ProductDetails"));
+
+const PageFallback = () => (
+    <Box sx={{ display: "flex", justifyContent: "center", padding: 8 }}>
+        <CircularProgress />
+    </Box>
+);
+
+const withSuspense = (Component) => (
+    <Suspense fallback={<PageFallback />}>
+        <Component />
+    </Suspense>
+);
 
 const router = createBrowserRouter([
   {
@@ -18,23 +35,23 @@ const router = createBrowserRouter([
     children: [
         {
             index: true,
-            element: <Home />
+            element: withSuspense(Home)
         },
         {
             path: "products",
-            element: <ProtectedRouter><Products /></ProtectedRouter>
+            element: <ProtectedRouter>{withSuspense(Products)}</ProtectedRouter>
         },
         {
             path: "product/:id",
-            element: <ProtectedRouter><ProductDetails /></ProtectedRouter>
+            element: <ProtectedRouter>{withSuspense(ProductDetails)}</ProtectedRouter>
         },
         {
             path: "cart",
-            element: <ProtectedRouter><Cart /></ProtectedRouter>
+            element: <ProtectedRouter>{withSuspense(Cart)}</ProtectedRouter>
         },
         {
             path: "checkout",
-            element: <ProtectedRouter><Checkout /></ProtectedRouter>
+            element: <ProtectedRouter>{withSuspense(Checkout)}</ProtectedRouter>
         },
         {
             path: "profile",
@@ -43,19 +60,19 @@ const router = createBrowserRouter([
         },
         {
             path: "profile/:tab",
-            element: <ProtectedRouter><Profile /></ProtectedRouter>
+            element: <ProtectedRouter>{withSuspense(Profile)}</ProtectedRouter>
         },
         {
             path: "login",
-            element: <Login />
+            element: withSuspense(Login)
         },
         {
             path: "forgot-password",
-            element: <ForgotPassword />
+            element: withSuspense(ForgotPassword)
         },
         {
             path: "register",
-            element: <Register />
+            element: withSuspense(Register)
         }
     ]
   },
