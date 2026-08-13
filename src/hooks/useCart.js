@@ -1,7 +1,7 @@
 import authAxiosInstance from '../api/authAxiosInstance';
 import { useQuery } from '@tanstack/react-query';
 
-export default function useCart() {
+export default function useCart(enabled = true) {
     const getItems = async () => {
         const response = await authAxiosInstance.get('/Carts');
         return response.data;
@@ -10,6 +10,7 @@ export default function useCart() {
     return useQuery({
         queryKey: ['cart'],
         queryFn: getItems,
-        staleTime: 1000 * 60 * 5
+        staleTime: 1000 * 60 * 5,
+        enabled,
     });
 }

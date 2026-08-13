@@ -6,7 +6,10 @@
     "logout": "Logout",
     "login": "Login",
     "register": "Register",
-    "profile": "Profile"
+    "profile": "Profile",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact"
   },
   "home": {
     "categoriesTitle": "Curated Worlds",
@@ -219,6 +222,31 @@
     "newsletterDescription": "Join our circle for exclusive early access.",
     "emailPlaceholder": "Email address",
     "copyright": "© 2024 ShopLux Premium. All rights reserved."
+  },
+  "about": {
+    "title": "About ShopLux",
+    "subtitle": "We curate premium products and pair them with a fast, secure, and enjoyable shopping experience.",
+    "value1Title": "Curated Selection",
+    "value1Text": "Every product is hand-picked for quality and design.",
+    "value2Title": "Verified Quality",
+    "value2Text": "All items go through a strict quality check before listing.",
+    "value3Title": "Fast Shipping",
+    "value3Text": "Reliable delivery with real-time order tracking.",
+    "value4Title": "24/7 Support",
+    "value4Text": "Our team is always ready to help with any question.",
+    "storyTitle": "Our Story",
+    "storyText": "ShopLux started with a simple idea: shopping online should feel as premium as the products themselves. Today we're proud to serve customers who value quality, design, and a smooth experience from browsing to checkout."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have a question about an order, a product, or anything else? Send us a message and we'll get back to you shortly.",
+    "address": "Ramallah, Palestine",
+    "name": "Full Name",
+    "email": "Email Address",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "success": "Your message has been sent! We'll get back to you soon."
   },
   "common": {
     "loading": "Loading..."
