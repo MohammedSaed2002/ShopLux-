@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
@@ -24,18 +23,76 @@ export default function Checkout() {
     const { data, isLoading } = useCart();
     const { data: productsData } = useProducts();
     const { mutate: checkout, isPending, isSuccess, isError } = useCheckout();
-    const [paymentMethod, setPaymentMethod] = useState("Cash");
 
-    const cardSchema = yup.object({
-        cardNumber: yup.string().required().matches(/^\d{16}$/, "16 digits"),
-        cardHolder: yup.string().required(),
-        expiryDate: yup.string().required().matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "MM/YY"),
-        cvv: yup.string().required().matches(/^\d{3,4}$/, "3-4 digits"),
+    const checkoutSchema = yup.object({
+        paymentMethod: yup.string().required(),
+        fullName: yup.string().trim().required(t("checkout.errors.required")),
+        phoneNumber: yup
+            .string()
+            .trim()
+            .required(t("checkout.errors.required"))
+            .matches(/^\+?[0-9]{7,15}$/, t("checkout.errors.phone")),
+        streetAddress: yup.string().trim().required(t("checkout.errors.required")),
+        city: yup.string().trim().required(t("checkout.errors.required")),
+        country: yup.string().trim().required(t("checkout.errors.required")),
+        cardNumber: yup.string().when("paymentMethod", {
+            is: "Visa",
+            then: (schema) =>
+                schema
+                    .required(t("checkout.errors.required"))
+                    .matches(/^\d{16}$/, t("checkout.errors.cardNumber")),
+            otherwise: (schema) => schema.notRequired(),
+        }),
+        cardHolder: yup.string().when("paymentMethod", {
+            is: "Visa",
+            then: (schema) => schema.required(t("checkout.errors.required")),
+            otherwise: (schema) => schema.notRequired(),
+        }),
+        expiryDate: yup.string().when("paymentMethod", {
+            is: "Visa",
+            then: (schema) =>
+                schema
+                    .required(t("checkout.errors.required"))
+                    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, t("checkout.errors.expiryDate")),
+            otherwise: (schema) => schema.notRequired(),
+        }),
+        cvv: yup.string().when("paymentMethod", {
+            is: "Visa",
+            then: (schema) =>
+                schema
+                    .required(t("checkout.errors.required"))
+                    .matches(/^\d{3,4}$/, t("checkout.errors.cvv")),
+            otherwise: (schema) => schema.notRequired(),
+        }),
     });
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(cardSchema),
+    const {
+        register,
+        handleSubmit,
+        watch,
+        setValue,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(checkoutSchema),
+        defaultValues: {
+            paymentMethod: "Cash",
+            fullName: "",
+            phoneNumber: "",
+            streetAddress: "",
+            city: "",
+            country: "",
+            cardNumber: "",
+            cardHolder: "",
+            expiryDate: "",
+            cvv: "",
+        },
     });
+
+    const paymentMethod = watch("paymentMethod");
+
+    const setPaymentMethod = (value) => {
+        setValue("paymentMethod", value, { shouldValidate: true });
+    };
 
     if (isLoading) return <CircularProgress sx={{ margin: 4 }} />
 
@@ -45,6 +102,10 @@ export default function Checkout() {
                 setTimeout(() => navigate("/"), 2000);
             }
         });
+    };
+
+    const onSubmit = () => {
+        runCheckout();
     };
 
     const subtotal = data?.cartTotal ?? 0;
@@ -58,11 +119,11 @@ export default function Checkout() {
                 {t("checkout.subtitle")}
             </Typography>
 
-            <Box sx={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
+            <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
                 {/* left side - forms */}
                 <Box sx={{ flex: "2 1 500px", display: "flex", flexDirection: "column", gap: 3 }}>
 
-                    {/* shipping address (visual only, not sent to server) */}
+                    {/* shipping address */}
                     <Box
                         sx={{
                             padding: 4,
@@ -78,11 +139,42 @@ export default function Checkout() {
                         </Box>
 
                         <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2.5 }}>
-                            <TextField label={t("checkout.fullName")} variant="outlined" />
-                            <TextField label={t("checkout.phoneNumber")} variant="outlined" />
-                            <TextField label={t("checkout.streetAddress")} variant="outlined" sx={{ gridColumn: "1 / span 2" }} />
-                            <TextField label={t("checkout.city")} variant="outlined" />
-                            <TextField label={t("checkout.country")} variant="outlined" />
+                            <TextField
+                                label={t("checkout.fullName")}
+                                variant="outlined"
+                                {...register("fullName")}
+                                error={!!errors.fullName}
+                                helperText={errors.fullName?.message}
+                            />
+                            <TextField
+                                label={t("checkout.phoneNumber")}
+                                variant="outlined"
+                                {...register("phoneNumber")}
+                                error={!!errors.phoneNumber}
+                                helperText={errors.phoneNumber?.message}
+                            />
+                            <TextField
+                                label={t("checkout.streetAddress")}
+                                variant="outlined"
+                                sx={{ gridColumn: "1 / span 2" }}
+                                {...register("streetAddress")}
+                                error={!!errors.streetAddress}
+                                helperText={errors.streetAddress?.message}
+                            />
+                            <TextField
+                                label={t("checkout.city")}
+                                variant="outlined"
+                                {...register("city")}
+                                error={!!errors.city}
+                                helperText={errors.city?.message}
+                            />
+                            <TextField
+                                label={t("checkout.country")}
+                                variant="outlined"
+                                {...register("country")}
+                                error={!!errors.country}
+                                helperText={errors.country?.message}
+                            />
                         </Box>
                     </Box>
 
@@ -135,7 +227,7 @@ export default function Checkout() {
                         </Box>
 
                         {paymentMethod === "Visa" && (
-                            <Box component="form" onSubmit={handleSubmit(runCheckout)} sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
                                 {/* card visual */}
                                 <Box
                                     sx={{
@@ -182,9 +274,6 @@ export default function Checkout() {
                                     error={!!errors.cardHolder}
                                     helperText={errors.cardHolder?.message}
                                 />
-
-                                {/* hidden submit trigger from the summary button on the right */}
-                                <button id="visa-submit-trigger" type="submit" style={{ display: "none" }} />
                             </Box>
                         )}
                     </Box>
@@ -249,6 +338,7 @@ export default function Checkout() {
                         {isError && <Alert severity="error" sx={{ marginBottom: 2 }}>{t("checkout.error")}</Alert>}
 
                         <Button
+                            type="submit"
                             fullWidth
                             variant="contained"
                             disabled={isPending || !data?.items?.length}
@@ -257,13 +347,6 @@ export default function Checkout() {
                                 padding: 1.8,
                                 borderRadius: 3,
                                 marginBottom: 2,
-                            }}
-                            onClick={() => {
-                                if (paymentMethod === "Visa") {
-                                    document.getElementById("visa-submit-trigger").click();
-                                } else {
-                                    runCheckout();
-                                }
                             }}
                         >
                             {isPending ? t("checkout.processing") : t("checkout.placeOrder")}

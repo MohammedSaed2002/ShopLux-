@@ -127,7 +127,14 @@
     "processing": "Processing...",
     "secureTransaction": "Encrypted Secure Transaction",
     "success": "Order placed successfully!",
-    "error": "Something went wrong, please try again."
+    "error": "Something went wrong, please try again.",
+    "errors": {
+      "required": "This field is required",
+      "phone": "Enter a valid phone number",
+      "cardNumber": "Card number must be 16 digits",
+      "expiryDate": "Use MM/YY format",
+      "cvv": "CVV must be 3-4 digits"
+    }
   },
   "profile": {
     "title": "My Profile",
