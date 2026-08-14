@@ -1,9 +1,16 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import CircularProgress from "@mui/material/CircularProgress"
 import Pagination from "@mui/material/Pagination"
+import Avatar from "@mui/material/Avatar"
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined"
+import VerifiedUserOutlinedIcon from "@mui/icons-material/VerifiedUserOutlined"
+import CachedOutlinedIcon from "@mui/icons-material/CachedOutlined"
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined"
+import StarIcon from "@mui/icons-material/Star"
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import useProducts from "../../hooks/useProducts"
@@ -29,6 +36,7 @@ export default function Home() {
     const { data, isLoading } = useProducts({ sortBy: "rate", ascending: false });
 
     const allProducts = data?.response?.data || [];
+    const bestSellers = allProducts.slice(0, 4);
     const pageCount = Math.ceil(allProducts.length / PRODUCTS_PER_PAGE);
     const currentProducts = allProducts.slice(
         (page - 1) * PRODUCTS_PER_PAGE,
@@ -220,6 +228,35 @@ export default function Home() {
                 </Box>
             </Box>
 
+            {/* trust strip */}
+            <Box
+                sx={{
+                    backgroundColor: "background.paper",
+                    borderBottom: "1px solid",
+                    borderColor: "divider",
+                    padding: { xs: 3, md: "20px 40px" },
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    gap: { xs: 3, md: 6 },
+                }}
+            >
+                {[
+                    { icon: <LocalShippingOutlinedIcon />, title: t("home.trustShipping"), text: t("home.trustShippingDesc") },
+                    { icon: <VerifiedUserOutlinedIcon />, title: t("home.trustPayment"), text: t("home.trustPaymentDesc") },
+                    { icon: <CachedOutlinedIcon />, title: t("home.trustReturns"), text: t("home.trustReturnsDesc") },
+                    { icon: <SupportAgentOutlinedIcon />, title: t("home.trustSupport"), text: t("home.trustSupportDesc") },
+                ].map((item) => (
+                    <Box key={item.title} sx={{ display: "flex", alignItems: "center", gap: 1.5, minWidth: 220 }}>
+                        <Box sx={{ color: "primary.main", display: "flex" }}>{item.icon}</Box>
+                        <Box>
+                            <Typography variant="body2" sx={{ fontWeight: 700, lineHeight: 1.3 }}>{item.title}</Typography>
+                            <Typography variant="caption" color="text.secondary">{item.text}</Typography>
+                        </Box>
+                    </Box>
+                ))}
+            </Box>
+
             <Box sx={{ padding: { xs: 3, sm: 4, md: 10 } }}>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 2, marginBottom: 4 }}>
                     <Box>
@@ -284,6 +321,124 @@ export default function Home() {
                         </Box>
                     ))}
                 </Box>
+            </Box>
+
+            {/* best sellers */}
+            {!isLoading && bestSellers.length > 0 && (
+                <Box sx={{ padding: { xs: 3, sm: 4, md: 10 }, backgroundColor: "background.paper" }}>
+                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 2, marginBottom: 4 }}>
+                        <Box>
+                            <Typography variant="h6">{t("home.bestSellersTitle")}</Typography>
+                            <Typography color="text.secondary">{t("home.bestSellersSubtitle")}</Typography>
+                        </Box>
+                        <Button onClick={() => navigate("/products")}>{t("home.viewAll")}</Button>
+                    </Box>
+
+                    <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap", justifyContent: { xs: "center", sm: "flex-start" } }}>
+                        {bestSellers.map((product, index) => (
+                            <Box
+                                key={product.id}
+                                sx={{
+                                    position: "relative",
+                                    flex: "0 1 260px",
+                                    width: { xs: "100%", sm: "auto" },
+                                    maxWidth: { xs: 320, sm: 260 },
+                                    backgroundColor: "background.default",
+                                    borderRadius: 3,
+                                    border: "1px solid",
+                                    borderColor: "divider",
+                                    padding: 2,
+                                    cursor: "pointer",
+                                    transition: "transform 0.2s, box-shadow 0.2s",
+                                    "&:hover": {
+                                        transform: "translateY(-4px)",
+                                        boxShadow: "0px 10px 20px -10px rgba(0,0,0,0.4)",
+                                    },
+                                }}
+                                onClick={() => navigate(`/product/${product.id}`)}
+                            >
+                                <Box
+                                    sx={{
+                                        position: "absolute",
+                                        top: 12,
+                                        left: 12,
+                                        zIndex: 1,
+                                        backgroundColor: "#FFB07C",
+                                        color: "#432100",
+                                        fontSize: "12px",
+                                        fontWeight: 700,
+                                        padding: "2px 10px",
+                                        borderRadius: "50px",
+                                    }}
+                                >
+                                    #{index + 1} {t("home.bestSellersBadge")}
+                                </Box>
+                                <Box
+                                    sx={{
+                                        width: "100%",
+                                        height: 200,
+                                        borderRadius: 2,
+                                        overflow: "hidden",
+                                        marginBottom: 2,
+                                        backgroundColor: "background.paper",
+                                    }}
+                                >
+                                    <Box
+                                        component="img"
+                                        src={product.image}
+                                        sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                                    />
+                                </Box>
+                                <Typography>{product.name}</Typography>
+                                <Typography color="primary">{product.price}$</Typography>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+            )}
+
+            {/* promo banner */}
+            <Box
+                sx={{
+                    margin: { xs: 3, sm: 4, md: 10 },
+                    padding: { xs: 4, md: 6 },
+                    borderRadius: 4,
+                    background: "linear-gradient(120deg, #4700B8 0%, #6E2BFF 55%, #a06bff 100%)",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 3,
+                }}
+            >
+                <Box sx={{ maxWidth: 480 }}>
+                    <Typography sx={{ color: "#FFB07C", fontWeight: 700, fontSize: "13px", letterSpacing: 1, marginBottom: 1 }}>
+                        {t("home.promoTag")}
+                    </Typography>
+                    <Typography variant="h5" sx={{ color: "#fff", fontWeight: 700, marginBottom: 1 }}>
+                        {t("home.promoTitle")}
+                    </Typography>
+                    <Typography sx={{ color: "rgba(255,255,255,.78)" }}>
+                        {t("home.promoDescription")}
+                    </Typography>
+                </Box>
+                <Button
+                    onClick={() => navigate("/products")}
+                    sx={{
+                        height: 48,
+                        padding: "0 32px",
+                        borderRadius: "50px",
+                        background: "#FFB07C",
+                        color: "#432100",
+                        fontWeight: 600,
+                        textTransform: "none",
+                        fontSize: "15px",
+                        whiteSpace: "nowrap",
+                        "&:hover": { background: "#ffc199" },
+                    }}
+                >
+                    {t("home.promoButton")}
+                </Button>
             </Box>
 
             <Box sx={{ backgroundColor: "background.paper", padding: { xs: 3, sm: 4, md: 10 } }}>
@@ -356,6 +511,83 @@ export default function Home() {
                         )}
                     </>
                 )}
+            </Box>
+
+            {/* testimonials */}
+            <Box sx={{ padding: { xs: 3, sm: 4, md: 10 } }}>
+                <Box sx={{ textAlign: "center", marginBottom: 5 }}>
+                    <Typography variant="h6">{t("home.testimonialsTitle")}</Typography>
+                    <Typography color="text.secondary">{t("home.testimonialsSubtitle")}</Typography>
+                </Box>
+
+                <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap", justifyContent: "center" }}>
+                    {[1, 2, 3].map((n) => (
+                        <Box
+                            key={n}
+                            sx={{
+                                flex: "1 1 300px",
+                                maxWidth: 360,
+                                padding: 3,
+                                borderRadius: 3,
+                                border: "1px solid",
+                                borderColor: "divider",
+                                backgroundColor: "background.paper",
+                            }}
+                        >
+                            <FormatQuoteIcon sx={{ color: "primary.main", opacity: 0.5, fontSize: 32, marginBottom: 1 }} />
+                            <Box sx={{ display: "flex", gap: 0.3, marginBottom: 1.5 }}>
+                                {[...Array(5)].map((_, i) => (
+                                    <StarIcon key={i} sx={{ fontSize: 18, color: "#FFB07C" }} />
+                                ))}
+                            </Box>
+                            <Typography color="text.secondary" sx={{ marginBottom: 2.5, minHeight: 72 }}>
+                                {t(`home.testimonial${n}Text`)}
+                            </Typography>
+                            <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+                                <Avatar sx={{ bgcolor: "primary.main", width: 38, height: 38, fontSize: 15 }}>
+                                    {t(`home.testimonial${n}Name`).charAt(0)}
+                                </Avatar>
+                                <Box>
+                                    <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                                        {t(`home.testimonial${n}Name`)}
+                                    </Typography>
+                                    <Typography variant="caption" color="text.secondary">
+                                        {t(`home.testimonial${n}Role`)}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
+
+            {/* stats */}
+            <Box
+                sx={{
+                    background: "linear-gradient(120deg, #16081F 0%, #4700B8 100%)",
+                    padding: { xs: 4, md: "48px 40px" },
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    gap: { xs: 4, md: 8 },
+                    textAlign: "center",
+                }}
+            >
+                {[
+                    { value: t("home.statsCustomersValue"), label: t("home.statsCustomersLabel") },
+                    { value: t("home.statsProductsValue"), label: t("home.statsProductsLabel") },
+                    { value: t("home.statsCountriesValue"), label: t("home.statsCountriesLabel") },
+                    { value: t("home.statsRatingValue"), label: t("home.statsRatingLabel") },
+                ].map((stat) => (
+                    <Box key={stat.label} sx={{ minWidth: 130 }}>
+                        <Typography sx={{ color: "#FFB07C", fontWeight: 800, fontSize: { xs: "1.8rem", md: "2.2rem" } }}>
+                            {stat.value}
+                        </Typography>
+                        <Typography sx={{ color: "rgba(255,255,255,.75)", fontSize: "14px" }}>
+                            {stat.label}
+                        </Typography>
+                    </Box>
+                ))}
             </Box>
         </Box>
     )
