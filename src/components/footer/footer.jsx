@@ -13,6 +13,8 @@ const ROUTE_MAP = {
     newArrivals: "/products",
     bestsellers: "/products",
     limitedEditions: "/products",
+    contactSupport: "/contact",
+    aboutUs: "/about",
 };
 
 export default function Footer() {

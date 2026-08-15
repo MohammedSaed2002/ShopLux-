@@ -17,6 +17,7 @@ const Register = lazy(() => import("./pages/register/Register"));
 const ProductDetails = lazy(() => import("./pages/productDetails/ProductDetails"));
 const About = lazy(() => import("./pages/about/About"));
 const Contact = lazy(() => import("./pages/contact/Contact"));
+const NotFound = lazy(() => import("./pages/notFound/NotFound"));
 
 const PageFallback = () => (
     <Box sx={{ display: "flex", justifyContent: "center", padding: 8 }}>
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
         {
             path: "contact",
             element: withSuspense(Contact)
+        },
+        {
+            path: "*",
+            element: withSuspense(NotFound)
         }
     ]
   },
