@@ -20,13 +20,6 @@ import useAuthStore from "../../store/useAuthStore";
 import useCart from "../../hooks/useCart";
 import { useThemeMode } from "../../context/useThemeMode";
 
-// navbar keeps a fixed dark identity regardless of the site-wide theme mode
-const NAV_BG = "#15121f";
-const NAV_BORDER = "rgba(255,255,255,0.08)";
-const NAV_TEXT = "#e7e0ee";
-const NAV_TEXT_MUTED = "#a89fb5";
-const NAV_ACCENT = "#c9a6ff";
-
 export default function Navbar() {
   const token = useAuthStore((state) => state.token);
   const logout = useAuthStore((state) => state.logout);
@@ -58,18 +51,18 @@ export default function Navbar() {
   ];
 
   const linkStyle = {
-    color: NAV_TEXT,
+    color: "text.primary",
     textDecoration: "none",
     fontSize: "15px",
     fontWeight: 500,
     cursor: "pointer",
     transition: "color 0.2s",
-    "&:hover": { color: NAV_ACCENT },
+    "&:hover": { color: "primary.main" },
   };
 
   const iconButtonSx = {
-    color: NAV_TEXT,
-    "&:hover": { color: NAV_ACCENT, backgroundColor: "rgba(255,255,255,0.06)" },
+    color: "text.primary",
+    "&:hover": { color: "primary.main", backgroundColor: "action.hover" },
   };
 
   return (
@@ -80,8 +73,9 @@ export default function Navbar() {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "14px 32px",
-        backgroundColor: NAV_BG,
-        borderBottom: `1px solid ${NAV_BORDER}`,
+        backgroundColor: "background.paper",
+        borderBottom: "1px solid",
+        borderColor: "divider",
         position: "sticky",
         top: 0,
         zIndex: 1100,
@@ -111,7 +105,7 @@ export default function Navbar() {
         >
           <ShoppingBagOutlinedIcon sx={{ color: "#fff", fontSize: 20 }} />
         </Box>
-        <Box sx={{ fontSize: "20px", fontWeight: 800, color: NAV_TEXT, letterSpacing: 0.3 }}>
+        <Box sx={{ fontSize: "20px", fontWeight: 800, color: "text.primary", letterSpacing: 0.3 }}>
           ShopLux
         </Box>
       </Box>
@@ -147,8 +141,8 @@ export default function Navbar() {
                   fontSize: "8px",
                   height: 14,
                   minWidth: 18,
-                  backgroundColor: NAV_ACCENT,
-                  color: "#15121f",
+                  backgroundColor: "primary.main",
+                  color: "primary.contrastText",
                   fontWeight: 700,
                 },
               }}
@@ -212,7 +206,7 @@ export default function Navbar() {
 
       {/* mobile drawer menu */}
       <Drawer anchor="right" open={menuOpen} onClose={() => setMenuOpen(false)}>
-        <Box sx={{ width: 270, padding: 3, height: "100%", backgroundColor: NAV_BG }}>
+        <Box sx={{ width: 270, padding: 3, height: "100%", backgroundColor: "background.paper" }}>
           <Box sx={{ display: "flex", justifyContent: "flex-end", marginBottom: 2 }}>
             <IconButton onClick={() => setMenuOpen(false)} sx={iconButtonSx}>
               <CloseIcon />
@@ -233,7 +227,7 @@ export default function Navbar() {
             ))}
           </Box>
 
-          <Divider sx={{ borderColor: NAV_BORDER, marginBottom: 3 }} />
+          <Divider sx={{ marginBottom: 3 }} />
 
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
@@ -245,9 +239,10 @@ export default function Navbar() {
                 onClick={toggleLanguage}
                 sx={{
                   backgroundColor: "transparent",
-                  border: `1px solid ${NAV_TEXT_MUTED}`,
+                  border: "1px solid",
+                  borderColor: "divider",
                   padding: "6px 14px",
-                  color: NAV_TEXT,
+                  color: "text.primary",
                   borderRadius: "6px",
                   cursor: "pointer",
                 }}
@@ -287,10 +282,10 @@ export default function Navbar() {
                   component="button"
                   onClick={handleLogout}
                   sx={{
-                    backgroundColor: NAV_ACCENT,
+                    backgroundColor: "primary.main",
                     border: "none",
                     padding: "10px 16px",
-                    color: "#15121f",
+                    color: "primary.contrastText",
                     fontWeight: 700,
                     borderRadius: "8px",
                     cursor: "pointer",
@@ -307,9 +302,9 @@ export default function Navbar() {
                   to="/login"
                   onClick={() => setMenuOpen(false)}
                   sx={{
-                    backgroundColor: NAV_ACCENT,
+                    backgroundColor: "primary.main",
                     padding: "10px 16px",
-                    color: "#15121f",
+                    color: "primary.contrastText",
                     fontWeight: 700,
                     borderRadius: "8px",
                     textAlign: "center",
@@ -324,9 +319,10 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   sx={{
                     backgroundColor: "transparent",
-                    border: `1px solid ${NAV_TEXT_MUTED}`,
+                    border: "1px solid",
+                    borderColor: "divider",
                     padding: "10px 16px",
-                    color: NAV_TEXT,
+                    color: "text.primary",
                     borderRadius: "8px",
                     textAlign: "center",
                     textDecoration: "none",
