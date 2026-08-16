@@ -7,6 +7,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -24,6 +25,7 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [loginError, setLoginError] = useState("");
+    const [loginSuccess, setLoginSuccess] = useState(false);
 
     const loginSchema = yup.object({
         email: yup.string().email().required(),
@@ -41,7 +43,8 @@ export default function Login() {
             const response = await axiosInstance.post("/auth/Account/Login", data);
             const token = response.data.accessToken;
             setToken(token);
-            navigate("/");
+            setLoginSuccess(true);
+            setTimeout(() => navigate("/"), 1200);
         } catch (err) {
             const serverMessage = err?.response?.data?.message;
             setLoginError(serverMessage || t("auth.loginError"));
@@ -166,6 +169,27 @@ export default function Login() {
                     </Typography>
                 </Box>
             </Box>
+
+            <Snackbar
+                open={loginSuccess}
+                autoHideDuration={2000}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert severity="success" variant="filled" sx={{ width: '100%' }}>
+                    {t("auth.loginSuccess")}
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={!!loginError}
+                autoHideDuration={4000}
+                onClose={() => setLoginError("")}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert severity="error" variant="filled" onClose={() => setLoginError("")} sx={{ width: '100%' }}>
+                    {loginError}
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

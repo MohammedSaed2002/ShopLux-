@@ -258,8 +258,13 @@
     "copyright": "© 2024 ShopLux Premium. All rights reserved."
   },
   "about": {
+    "badge": "Welcome to ShopLux",
     "title": "About ShopLux",
     "subtitle": "We curate premium products and pair them with a fast, secure, and enjoyable shopping experience.",
+    "introParagraph": "ShopLux is a modern e-commerce platform focused on bringing carefully selected products together with a smooth, secure, and enjoyable shopping experience — from the first click to the moment your order arrives at your door.",
+    "cta": "Explore Our Collection",
+    "whyChooseTitle": "Why Choose ShopLux?",
+    "whyChooseSubtitle": "Everything we do is built around one goal: a shopping experience you can trust.",
     "value1Title": "Curated Selection",
     "value1Text": "Every product is hand-picked for quality and design.",
     "value2Title": "Verified Quality",
@@ -269,7 +274,7 @@
     "value4Title": "24/7 Support",
     "value4Text": "Our team is always ready to help with any question.",
     "storyTitle": "Our Story",
-    "storyText": "ShopLux started with a simple idea: shopping online should feel as premium as the products themselves. Today we're proud to serve customers who value quality, design, and a smooth experience from browsing to checkout."
+    "storyText": "ShopLux started with a simple idea: online shopping should feel as premium as the products themselves. Today, we aim to provide customers with quality products, thoughtful design, and a smooth experience from browsing to checkout."
   },
   "contact": {
     "title": "Contact Us",

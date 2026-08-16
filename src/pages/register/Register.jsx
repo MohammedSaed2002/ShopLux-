@@ -9,6 +9,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -27,6 +28,7 @@ export default function Register() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [registerError, setRegisterError] = useState("");
+    const [registerSuccess, setRegisterSuccess] = useState(false);
 
     const registerSchema = yup.object({
         userName: yup.string().required().min(3).max(20),
@@ -50,7 +52,8 @@ export default function Register() {
             const response = await axiosInstance.post("/auth/Account/Register", data);
             const token = response.data.accessToken || response.data.token;
             setToken(token);
-            navigate("/");
+            setRegisterSuccess(true);
+            setTimeout(() => navigate("/"), 1200);
         } catch (err) {
             const serverMessage = err?.response?.data?.message;
             setRegisterError(serverMessage || t("auth.registerError"));
@@ -209,6 +212,27 @@ export default function Register() {
                     </Typography>
                 </Box>
             </Box>
+
+            <Snackbar
+                open={registerSuccess}
+                autoHideDuration={2000}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert severity="success" variant="filled" sx={{ width: '100%' }}>
+                    {t("auth.registerSuccess")}
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={!!registerError}
+                autoHideDuration={4000}
+                onClose={() => setRegisterError("")}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert severity="error" variant="filled" onClose={() => setRegisterError("")} sx={{ width: '100%' }}>
+                    {registerError}
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }
