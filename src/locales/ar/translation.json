@@ -19,7 +19,6 @@
     "heroLine2": "حياتك",
     "heroDescription": "استمتع بمزيج من الجمال الفاخر والأداء المتطور. مجموعات مختارة لعشاق الجودة العصرية.",
     "shopCollection": "تسوق المجموعة",
-    "featuredTitle": "الأكثر تميزاً",
     "categoryElectronics": "إلكترونيات",
     "categoryFashion": "أزياء",
     "categoryHome": "منزل",
@@ -57,7 +56,9 @@
     "statsCountriesValue": "+20",
     "statsCountriesLabel": "دولة نخدمها",
     "statsRatingValue": "4.9/5",
-    "statsRatingLabel": "متوسط التقييم"
+    "statsRatingLabel": "متوسط التقييم",
+    "featuredTitle": "منتجات مختارة",
+    "featuredSubtitle": "اكتشف منتجاتنا المختارة بعناية لجودتها وأناقتها وأدائها المميز للاستخدام اليومي."
   },
   "cart": {
     "title": "سلة التسوق",

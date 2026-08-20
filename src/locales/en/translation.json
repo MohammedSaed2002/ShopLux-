@@ -19,7 +19,6 @@
     "heroLine2": "Lifestyle",
     "heroDescription": "Experience the fusion of high-end aesthetics and cutting-edge performance. Curated collections for the modern connoisseur.",
     "shopCollection": "Shop Collection",
-    "featuredTitle": "Featured Selection",
     "categoryElectronics": "Electronics",
     "categoryFashion": "Fashion",
     "categoryHome": "Home",
@@ -57,7 +56,9 @@
     "statsCountriesValue": "20+",
     "statsCountriesLabel": "Countries Served",
     "statsRatingValue": "4.9/5",
-    "statsRatingLabel": "Average Rating"
+    "statsRatingLabel": "Average Rating",
+    "featuredTitle": "Featured Selection",
+    "featuredSubtitle": "Discover our handpicked products selected for quality, style, and everyday performance."
   },
   "cart": {
     "title": "Your Shopping Bag",

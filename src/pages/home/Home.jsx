@@ -1,16 +1,36 @@
+import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom"
+import { useTheme } from "@mui/material/styles"
+
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
-import { useNavigate } from "react-router-dom"
-import { useTheme } from "@mui/material/styles"
+import CircularProgress from "@mui/material/CircularProgress"
+import Snackbar from "@mui/material/Snackbar"
+import Alert from "@mui/material/Alert"
 
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined"
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined"
 import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined"
 import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
+import FavoriteIcon from "@mui/icons-material/Favorite"
+import StarIcon from "@mui/icons-material/Star"
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 
+// Hero
 import heroImage from "../../assets/shoplux-hero.svg"
+
+// Categories
+import beautyIcon from "../../assets/icons/Beauty.svg"
+import electronicsIcon from "../../assets/icons/Electronics.svg"
+import fashionIcon from "../../assets/icons/Fashion.svg"
+import homeIcon from "../../assets/icons/Home.svg"
+
+import useProducts from "../../hooks/useProducts"
+import useAddToCart from "../../hooks/useAddToCart"
 
 export default function Home() {
     const { t, i18n } = useTranslation()
@@ -18,7 +38,39 @@ export default function Home() {
     const theme = useTheme()
 
     const isDark = theme.palette.mode === "dark"
-    const isRTL = i18n.language === "ar"
+
+    // Use i18next's own dir() helper instead of a strict
+    // string match against "ar". This correctly detects RTL
+    // even if i18n.language resolves to something like "ar-SA"
+    // or "AR", which a strict === "ar" check would miss.
+    const isRTL = i18n.dir() === "rtl"
+
+    const [favorites, setFavorites] = useState({})
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: "",
+        severity: "success",
+    })
+
+    const { mutate: addToCart } = useAddToCart()
+
+    // =========================
+    // Featured Products
+    // =========================
+
+    const { data, isLoading } = useProducts({
+        sortBy: "rate",
+        ascending: false,
+    })
+
+    const featuredProducts = useMemo(() => {
+        const products = data?.response?.data || []
+        return products.slice(0, 4)
+    }, [data])
+
+    // =========================
+    // Trust Bar
+    // =========================
 
     const trustItems = [
         {
@@ -43,8 +95,75 @@ export default function Home() {
         },
     ]
 
+    // =========================
+    // Categories
+    // =========================
+
+    const categories = [
+        {
+            image: beautyIcon,
+            title: t("home.categoryBeauty"),
+        },
+        {
+            image: electronicsIcon,
+            title: t("home.categoryElectronics"),
+        },
+        {
+            image: fashionIcon,
+            title: t("home.categoryFashion"),
+        },
+        {
+            image: homeIcon,
+            title: t("home.categoryHome"),
+        },
+    ]
+
+    // =========================
+    // Favorites
+    // =========================
+
+    const toggleFavorite = (productId) => {
+        setFavorites((prev) => ({
+            ...prev,
+            [productId]: !prev[productId],
+        }))
+    }
+
+    // =========================
+    // Add To Cart
+    // =========================
+
+    const handleAddToCart = (productId) => {
+        addToCart(
+            {
+                productId,
+                count: 1,
+            },
+            {
+                onSuccess: () => {
+                    setSnackbar({
+                        open: true,
+                        message: t("products.addedToCart"),
+                        severity: "success",
+                    })
+                },
+                onError: () => {
+                    setSnackbar({
+                        open: true,
+                        message: t("products.addToCartError"),
+                        severity: "error",
+                    })
+                },
+            }
+        )
+    }
+
     return (
         <Box>
+            {/* =========================================================
+                HERO SECTION
+            ========================================================= */}
+
             <Box
                 component="section"
                 sx={{
@@ -135,6 +254,15 @@ export default function Home() {
                     },
                 }}
             >
+                {/* Hero content
+                    IMPORTANT:
+                    direction is always LTR here so the image
+                    does not move when switching language.
+                    The visual left/right swap between languages
+                    is handled purely via the `order` property
+                    below (based on isRTL), not via `direction`.
+                */}
+
                 <Box
                     sx={{
                         position: "relative",
@@ -147,8 +275,7 @@ export default function Home() {
 
                         gridTemplateColumns: {
                             xs: "1fr",
-                            md: "0.9fr 1.1fr",
-                            lg: "0.85fr 1.15fr",
+                            md: "1fr 1fr",
                         },
 
                         alignItems: "center",
@@ -160,22 +287,34 @@ export default function Home() {
                             lg: 3,
                         },
 
-                        direction: isRTL ? "rtl" : "ltr",
+                        direction: "ltr",
                     }}
                 >
+                    {/* ================= TEXT =================
+                        English (isRTL false): LEFT column (order 1)
+                        Arabic  (isRTL true):  RIGHT column (order 2)
+                    */}
+
                     <Box
                         sx={{
                             maxWidth: 500,
+
+                            order: {
+                                xs: 1,
+                                md: isRTL ? 2 : 1,
+                            },
 
                             textAlign: {
                                 xs: "center",
                                 md: isRTL ? "right" : "left",
                             },
 
-                            mx: {
-                                xs: "auto",
-                                md: 0,
+                            justifySelf: {
+                                xs: "center",
+                                md: isRTL ? "end" : "start",
                             },
+
+                            direction: isRTL ? "rtl" : "ltr",
                         }}
                     >
                         <Typography
@@ -197,8 +336,6 @@ export default function Home() {
 
                                 lineHeight: 1.25,
                                 margin: 0,
-
-                                transition: "color 0.3s ease",
                             }}
                         >
                             {t("home.heroLine1")}{" "}
@@ -231,12 +368,15 @@ export default function Home() {
 
                                 maxWidth: 420,
 
-                                mx: {
+                                ml: {
                                     xs: "auto",
-                                    md: isRTL ? 0 : 0,
+                                    md: isRTL ? "auto" : 0,
                                 },
 
-                                transition: "color 0.3s ease",
+                                mr: {
+                                    xs: "auto",
+                                    md: isRTL ? 0 : "auto",
+                                },
                             }}
                         >
                             {t("home.heroDescription")}
@@ -249,7 +389,9 @@ export default function Home() {
 
                                 justifyContent: {
                                     xs: "center",
-                                    md: isRTL ? "flex-start" : "flex-start",
+                                    md: isRTL
+                                        ? "flex-end"
+                                        : "flex-start",
                                 },
 
                                 flexWrap: "wrap",
@@ -274,7 +416,9 @@ export default function Home() {
                                     color: "#432100",
 
                                     fontWeight: 700,
+
                                     textTransform: "none",
+
                                     fontSize: "15px",
 
                                     boxShadow:
@@ -313,19 +457,15 @@ export default function Home() {
                                         : "#5A20C8",
 
                                     fontWeight: 500,
-                                    textTransform: "none",
-                                    fontSize: "15px",
 
-                                    transition: "all 0.3s ease",
+                                    textTransform: "none",
+
+                                    fontSize: "15px",
 
                                     "&:hover": {
                                         background: isDark
                                             ? "rgba(255,255,255,.15)"
                                             : "rgba(110,43,255,.14)",
-
-                                        borderColor: isDark
-                                            ? "#FFFFFF"
-                                            : "#6E2BFF",
                                     },
                                 }}
                             >
@@ -334,17 +474,25 @@ export default function Home() {
                         </Box>
                     </Box>
 
+                    {/* ================= HERO IMAGE =================
+                        English (isRTL false): RIGHT column (order 2)
+                        Arabic  (isRTL true):  LEFT column (order 1)
+                    */}
+
                     <Box
                         sx={{
                             width: "100%",
+
+                            order: {
+                                xs: 2,
+                                md: isRTL ? 1 : 2,
+                            },
 
                             display: "flex",
 
                             justifyContent: {
                                 xs: "center",
-                                md: isRTL
-                                    ? "flex-start"
-                                    : "flex-end",
+                                md: isRTL ? "flex-start" : "flex-end",
                             },
 
                             alignItems: "center",
@@ -417,6 +565,10 @@ export default function Home() {
                 </Box>
             </Box>
 
+            {/* =========================================================
+                TRUST BAR
+            ========================================================= */}
+
             <Box
                 component="section"
                 sx={{
@@ -427,8 +579,6 @@ export default function Home() {
                     borderBottom: isDark
                         ? "1px solid rgba(255,255,255,0.08)"
                         : "1px solid rgba(36,17,63,0.08)",
-
-                    transition: "all 0.3s ease",
                 }}
             >
                 <Box
@@ -472,7 +622,6 @@ export default function Home() {
                                 key={item.title}
                                 sx={{
                                     display: "flex",
-
                                     alignItems: "center",
 
                                     justifyContent: {
@@ -532,14 +681,16 @@ export default function Home() {
                                             : "#6E2BFF",
                                     }}
                                 >
-                                    <Icon
-                                        sx={{
-                                            fontSize: 22,
-                                        }}
-                                    />
+                                    <Icon sx={{ fontSize: 22 }} />
                                 </Box>
 
-                                <Box>
+                                <Box
+                                    sx={{
+                                        direction: isRTL
+                                            ? "rtl"
+                                            : "ltr",
+                                    }}
+                                >
                                     <Typography
                                         sx={{
                                             fontSize: {
@@ -585,6 +736,852 @@ export default function Home() {
                     })}
                 </Box>
             </Box>
+
+            {/* =========================================================
+                CATEGORIES
+            ========================================================= */}
+
+            <Box
+                component="section"
+                sx={{
+                    backgroundColor: isDark
+                        ? "#100817"
+                        : "#FFFFFF",
+
+                    py: {
+                        xs: 6,
+                        sm: 7,
+                        md: 8,
+                    },
+
+                    px: {
+                        xs: 2.5,
+                        sm: 4,
+                        md: 6,
+                        lg: 8,
+                    },
+
+                    direction: isRTL ? "rtl" : "ltr",
+                }}
+            >
+                <Box
+                    sx={{
+                        maxWidth: "1450px",
+                        mx: "auto",
+                    }}
+                >
+                    {/* Categories Header */}
+
+                    <Box
+                        sx={{
+                            display: "flex",
+
+                            alignItems: {
+                                xs: "flex-start",
+                                sm: "center",
+                            },
+
+                            justifyContent: "space-between",
+
+                            gap: 2,
+
+                            mb: 4,
+
+                            flexDirection: {
+                                xs: "column",
+                                sm: isRTL ? "row-reverse" : "row",
+                            },
+
+                            textAlign: {
+                                xs: isRTL ? "right" : "left",
+                                sm: isRTL ? "right" : "left",
+                            },
+                        }}
+                    >
+                        <Box>
+                            <Typography
+                                sx={{
+                                    color: isDark
+                                        ? "#FFFFFF"
+                                        : "#24113F",
+
+                                    fontSize: {
+                                        xs: "1.7rem",
+                                        md: "2.1rem",
+                                    },
+
+                                    fontWeight: 700,
+
+                                    lineHeight: 1.2,
+
+                                    mb: 1,
+                                }}
+                            >
+                                {t("home.categoriesTitle")}
+                            </Typography>
+
+                            <Typography
+                                sx={{
+                                    color: isDark
+                                        ? "rgba(255,255,255,0.60)"
+                                        : "rgba(36,17,63,0.60)",
+
+                                    fontSize: "14px",
+                                }}
+                            >
+                                {t("home.categoriesSubtitle")}
+                            </Typography>
+                        </Box>
+
+                        <Button
+                            onClick={() => navigate("/products")}
+                            sx={{
+                                color: isDark
+                                    ? "#FFB07C"
+                                    : "#6E2BFF",
+
+                                fontWeight: 700,
+
+                                textTransform: "none",
+
+                                whiteSpace: "nowrap",
+                            }}
+                        >
+                            {t("home.viewAll")}
+                        </Button>
+                    </Box>
+
+                    {/* Category Cards */}
+
+                    <Box
+                        sx={{
+                            display: "grid",
+
+                            gridTemplateColumns: {
+                                xs: "repeat(2, 1fr)",
+                                sm: "repeat(4, 1fr)",
+                            },
+
+                            gap: {
+                                xs: 2,
+                                sm: 2.5,
+                                md: 3,
+                            },
+                        }}
+                    >
+                        {categories.map((category) => (
+                            <Box
+                                key={category.title}
+                                onClick={() => navigate("/products")}
+                                sx={{
+                                    cursor: "pointer",
+
+                                    backgroundColor: isDark
+                                        ? "#1B1024"
+                                        : "#FAF8FF",
+
+                                    border: isDark
+                                        ? "1px solid rgba(255,255,255,0.07)"
+                                        : "1px solid rgba(36,17,63,0.07)",
+
+                                    borderRadius: "18px",
+
+                                    minHeight: {
+                                        xs: 150,
+                                        sm: 180,
+                                    },
+
+                                    display: "flex",
+
+                                    flexDirection: "column",
+
+                                    alignItems: "center",
+
+                                    justifyContent: "center",
+
+                                    gap: 1.5,
+
+                                    transition:
+                                        "transform 0.25s ease, box-shadow 0.25s ease",
+
+                                    "&:hover": {
+                                        transform:
+                                            "translateY(-5px)",
+
+                                        boxShadow: isDark
+                                            ? "0 15px 35px rgba(0,0,0,0.25)"
+                                            : "0 15px 35px rgba(36,17,63,0.10)",
+                                    },
+                                }}
+                            >
+                                <Box
+                                    component="img"
+                                    src={category.image}
+                                    alt={category.title}
+                                    sx={{
+                                        width: {
+                                            xs: 65,
+                                            sm: 80,
+                                        },
+
+                                        height: {
+                                            xs: 65,
+                                            sm: 80,
+                                        },
+
+                                        objectFit: "contain",
+
+                                        display: "block",
+                                    }}
+                                />
+
+                                <Typography
+                                    sx={{
+                                        color: isDark
+                                            ? "#FFFFFF"
+                                            : "#24113F",
+
+                                        fontWeight: 700,
+
+                                        fontSize: {
+                                            xs: "13px",
+                                            sm: "15px",
+                                        },
+
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    {category.title}
+                                </Typography>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+            </Box>
+
+            {/* =========================================================
+                FEATURED PRODUCTS
+            ========================================================= */}
+
+            <Box
+                component="section"
+                sx={{
+                    backgroundColor: isDark
+                        ? "#100817"
+                        : "#FAF8FF",
+
+                    py: {
+                        xs: 7,
+                        sm: 8,
+                        md: 10,
+                    },
+
+                    px: {
+                        xs: 2.5,
+                        sm: 4,
+                        md: 6,
+                        lg: 8,
+                    },
+
+                    direction: isRTL ? "rtl" : "ltr",
+                }}
+            >
+                <Box
+                    sx={{
+                        maxWidth: "1450px",
+                        mx: "auto",
+                    }}
+                >
+                    {/* Header */}
+
+                    <Box
+                        sx={{
+                            display: "flex",
+
+                            alignItems: {
+                                xs: "flex-start",
+                                sm: "flex-end",
+                            },
+
+                            justifyContent: "space-between",
+
+                            gap: 3,
+
+                            mb: {
+                                xs: 4,
+                                md: 5,
+                            },
+
+                            flexDirection: {
+                                xs: "column",
+                                sm: isRTL ? "row-reverse" : "row",
+                            },
+
+                            direction: isRTL
+                                ? "rtl"
+                                : "ltr",
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                textAlign: {
+                                    xs: isRTL ? "right" : "left",
+                                    sm: isRTL ? "right" : "left",
+                                },
+
+                                width: {
+                                    xs: "100%",
+                                    sm: "auto",
+                                },
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    color: isDark
+                                        ? "#FFFFFF"
+                                        : "#24113F",
+
+                                    fontSize: {
+                                        xs: "1.8rem",
+                                        md: "2.2rem",
+                                    },
+
+                                    fontWeight: 700,
+
+                                    lineHeight: 1.2,
+
+                                    mb: 1,
+                                }}
+                            >
+                                {t("home.featuredTitle")}
+                            </Typography>
+
+                            <Typography
+                                sx={{
+                                    color: isDark
+                                        ? "rgba(255,255,255,0.60)"
+                                        : "rgba(36,17,63,0.60)",
+
+                                    fontSize: "14px",
+                                }}
+                            >
+                                {t("home.featuredSubtitle")}
+                            </Typography>
+                        </Box>
+
+                        <Button
+                            onClick={() =>
+                                navigate("/products")
+                            }
+                            sx={{
+                                color: isDark
+                                    ? "#FFB07C"
+                                    : "#6E2BFF",
+
+                                fontWeight: 700,
+
+                                textTransform: "none",
+
+                                whiteSpace: "nowrap",
+
+                                display: "flex",
+
+                                flexDirection: isRTL
+                                    ? "row-reverse"
+                                    : "row",
+
+                                gap: 0.5,
+                            }}
+                        >
+                            {t("home.viewAll")}
+
+                            <ArrowForwardIcon
+                                fontSize="small"
+                                sx={{
+                                    transform: isRTL
+                                        ? "rotate(180deg)"
+                                        : "none",
+                                }}
+                            />
+                        </Button>
+                    </Box>
+
+                    {/* Loading */}
+
+                    {isLoading ? (
+                        <Box
+                            sx={{
+                                minHeight: 300,
+
+                                display: "flex",
+
+                                alignItems: "center",
+
+                                justifyContent: "center",
+                            }}
+                        >
+                            <CircularProgress
+                                sx={{
+                                    color: isDark
+                                        ? "#FFB07C"
+                                        : "#6E2BFF",
+                                }}
+                            />
+                        </Box>
+                    ) : (
+                        <Box
+                            sx={{
+                                display: "grid",
+
+                                gridTemplateColumns: {
+                                    xs: "1fr",
+                                    sm: "repeat(2, 1fr)",
+                                    lg: "repeat(4, 1fr)",
+                                },
+
+                                gap: {
+                                    xs: 2.5,
+                                    md: 3,
+                                },
+
+                                // Keep product order consistent
+                                // in both languages.
+                                direction: "ltr",
+                            }}
+                        >
+                            {featuredProducts.map(
+                                (product) => (
+                                    <Box
+                                        key={product.id}
+                                        onClick={() =>
+                                            navigate(
+                                                `/product/${product.id}`
+                                            )
+                                        }
+                                        sx={{
+                                            backgroundColor:
+                                                isDark
+                                                    ? "#1B1024"
+                                                    : "#FFFFFF",
+
+                                            border: isDark
+                                                ? "1px solid rgba(255,255,255,0.07)"
+                                                : "1px solid rgba(36,17,63,0.07)",
+
+                                            borderRadius:
+                                                "20px",
+
+                                            overflow:
+                                                "hidden",
+
+                                            cursor: "pointer",
+
+                                            transition:
+                                                "transform 0.25s ease, box-shadow 0.25s ease",
+
+                                            boxShadow:
+                                                isDark
+                                                    ? "0 12px 35px rgba(0,0,0,0.25)"
+                                                    : "0 12px 35px rgba(36,17,63,0.08)",
+
+                                            "&:hover":
+                                                {
+                                                    transform:
+                                                        "translateY(-5px)",
+
+                                                    boxShadow:
+                                                        isDark
+                                                            ? "0 18px 45px rgba(0,0,0,0.35)"
+                                                            : "0 18px 45px rgba(36,17,63,0.13)",
+                                                },
+                                        }}
+                                    >
+                                        {/* Product Image */}
+
+                                        <Box
+                                            sx={{
+                                                position:
+                                                    "relative",
+
+                                                height: {
+                                                    xs: 240,
+                                                    sm: 220,
+                                                    md: 230,
+                                                },
+
+                                                backgroundColor:
+                                                    isDark
+                                                        ? "#24132F"
+                                                        : "#F6F3FA",
+
+                                                display:
+                                                    "flex",
+
+                                                alignItems:
+                                                    "center",
+
+                                                justifyContent:
+                                                    "center",
+
+                                                overflow:
+                                                    "hidden",
+
+                                                p: {
+                                                    xs: 1.5,
+                                                    sm: 2,
+                                                },
+                                            }}
+                                        >
+                                            <Box
+                                                component="img"
+                                                src={
+                                                    product.image
+                                                }
+                                                alt={
+                                                    product.name
+                                                }
+                                                sx={{
+                                                    width:
+                                                        "100%",
+
+                                                    height:
+                                                        "100%",
+
+                                                    objectFit:
+                                                        "contain",
+
+                                                    display:
+                                                        "block",
+
+                                                    // This makes
+                                                    // the product
+                                                    // smaller inside
+                                                    // the card.
+                                                    transform:
+                                                        "scale(0.88)",
+
+                                                    transition:
+                                                        "transform 0.3s ease",
+                                                }}
+                                            />
+
+                                            {/* Favorite */}
+
+                                            <Box
+                                                onClick={(
+                                                    e
+                                                ) => {
+                                                    e.stopPropagation()
+
+                                                    toggleFavorite(
+                                                        product.id
+                                                    )
+                                                }}
+                                                sx={{
+                                                    position:
+                                                        "absolute",
+
+                                                    top: 12,
+
+                                                    right:
+                                                        isRTL
+                                                            ? "auto"
+                                                            : 12,
+
+                                                    left:
+                                                        isRTL
+                                                            ? 12
+                                                            : "auto",
+
+                                                    width: 38,
+
+                                                    height: 38,
+
+                                                    borderRadius:
+                                                        "50%",
+
+                                                    display:
+                                                        "flex",
+
+                                                    alignItems:
+                                                        "center",
+
+                                                    justifyContent:
+                                                        "center",
+
+                                                    backgroundColor:
+                                                        "rgba(20,15,25,0.55)",
+
+                                                    backdropFilter:
+                                                        "blur(8px)",
+                                                }}
+                                            >
+                                                {favorites[
+                                                    product.id
+                                                ] ? (
+                                                    <FavoriteIcon
+                                                        sx={{
+                                                            color: "#FFB07C",
+                                                            fontSize: 20,
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <FavoriteBorderIcon
+                                                        sx={{
+                                                            color: "#FFFFFF",
+                                                            fontSize: 20,
+                                                        }}
+                                                    />
+                                                )}
+                                            </Box>
+                                        </Box>
+
+                                        {/* Product Information */}
+
+                                        <Box
+                                            sx={{
+                                                p: 2.5,
+
+                                                direction:
+                                                    isRTL
+                                                        ? "rtl"
+                                                        : "ltr",
+                                            }}
+                                        >
+                                            {/* Name + Rating */}
+
+                                            <Box
+                                                sx={{
+                                                    display:
+                                                        "flex",
+
+                                                    justifyContent:
+                                                        "space-between",
+
+                                                    alignItems:
+                                                        "flex-start",
+
+                                                    gap: 1,
+                                                }}
+                                            >
+                                                <Typography
+                                                    sx={{
+                                                        color: isDark
+                                                            ? "#FFFFFF"
+                                                            : "#24113F",
+
+                                                        fontWeight:
+                                                            600,
+
+                                                        fontSize:
+                                                            "15px",
+
+                                                        lineHeight:
+                                                            1.4,
+
+                                                        display:
+                                                            "-webkit-box",
+
+                                                        WebkitLineClamp:
+                                                            2,
+
+                                                        WebkitBoxOrient:
+                                                            "vertical",
+
+                                                        overflow:
+                                                            "hidden",
+
+                                                        textAlign:
+                                                            isRTL
+                                                                ? "right"
+                                                                : "left",
+                                                    }}
+                                                >
+                                                    {
+                                                        product.name
+                                                    }
+                                                </Typography>
+
+                                                <Box
+                                                    sx={{
+                                                        display:
+                                                            "flex",
+
+                                                        alignItems:
+                                                            "center",
+
+                                                        gap: 0.3,
+
+                                                        flexShrink:
+                                                            0,
+
+                                                        direction:
+                                                            "ltr",
+                                                    }}
+                                                >
+                                                    <StarIcon
+                                                        sx={{
+                                                            color: "#FFB07C",
+                                                            fontSize: 17,
+                                                        }}
+                                                    />
+
+                                                    <Typography
+                                                        sx={{
+                                                            color: "#FFB07C",
+
+                                                            fontSize:
+                                                                "13px",
+
+                                                            fontWeight:
+                                                                600,
+                                                        }}
+                                                    >
+                                                        {
+                                                            product.rate
+                                                        }
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+
+                                            {/* Price + Cart */}
+
+                                            <Box
+                                                sx={{
+                                                    display:
+                                                        "flex",
+
+                                                    alignItems:
+                                                        "center",
+
+                                                    justifyContent:
+                                                        "space-between",
+
+                                                    gap: 1,
+
+                                                    mt: 2.5,
+                                                }}
+                                            >
+                                                <Typography
+                                                    sx={{
+                                                        color: isDark
+                                                            ? "#FFB07C"
+                                                            : "#6E2BFF",
+
+                                                        fontSize:
+                                                            "18px",
+
+                                                        fontWeight:
+                                                            700,
+
+                                                        direction:
+                                                            "ltr",
+                                                    }}
+                                                >
+                                                    $
+                                                    {
+                                                        product.price
+                                                    }
+                                                </Typography>
+
+                                                <Button
+                                                    onClick={(
+                                                        e
+                                                    ) => {
+                                                        e.stopPropagation()
+
+                                                        handleAddToCart(
+                                                            product.id
+                                                        )
+                                                    }}
+                                                    startIcon={
+                                                        <ShoppingCartOutlinedIcon fontSize="small" />
+                                                    }
+                                                    sx={{
+                                                        minWidth:
+                                                            0,
+
+                                                        px: 1.5,
+
+                                                        py: 0.8,
+
+                                                        borderRadius:
+                                                            "10px",
+
+                                                        backgroundColor:
+                                                            isDark
+                                                                ? "rgba(255,176,124,0.10)"
+                                                                : "rgba(110,43,255,0.08)",
+
+                                                        color: isDark
+                                                            ? "#FFB07C"
+                                                            : "#6E2BFF",
+
+                                                        fontSize:
+                                                            "12px",
+
+                                                        fontWeight:
+                                                            700,
+
+                                                        textTransform:
+                                                            "none",
+
+                                                        "&:hover":
+                                                            {
+                                                                backgroundColor:
+                                                                    isDark
+                                                                        ? "rgba(255,176,124,0.18)"
+                                                                        : "rgba(110,43,255,0.14)",
+                                                            },
+                                                    }}
+                                                >
+                                                    {t(
+                                                        "products.addToCart"
+                                                    )}
+                                                </Button>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                )
+                            )}
+                        </Box>
+                    )}
+                </Box>
+            </Box>
+
+            {/* =========================================================
+                SNACKBAR
+            ========================================================= */}
+
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={3000}
+                onClose={() =>
+                    setSnackbar((s) => ({
+                        ...s,
+                        open: false,
+                    }))
+                }
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                }}
+            >
+                <Alert
+                    onClose={() =>
+                        setSnackbar((s) => ({
+                            ...s,
+                            open: false,
+                        }))
+                    }
+                    severity={snackbar.severity}
+                    sx={{
+                        width: "100%",
+                    }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }
