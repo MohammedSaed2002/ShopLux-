@@ -290,25 +290,105 @@
     "emailPlaceholder": "Email address",
     "copyright": "© 2024 ShopLux Premium. All rights reserved."
   },
+  
   "about": {
-    "badge": "Welcome to ShopLux",
-    "title": "About ShopLux",
-    "subtitle": "We curate premium products and pair them with a fast, secure, and enjoyable shopping experience.",
-    "introParagraph": "ShopLux is a modern e-commerce platform focused on bringing carefully selected products together with a smooth, secure, and enjoyable shopping experience — from the first click to the moment your order arrives at your door.",
-    "cta": "Explore Our Collection",
-    "whyChooseTitle": "Why Choose ShopLux?",
-    "whyChooseSubtitle": "Everything we do is built around one goal: a shopping experience you can trust.",
-    "value1Title": "Curated Selection",
-    "value1Text": "Every product is hand-picked for quality and design.",
-    "value2Title": "Verified Quality",
-    "value2Text": "All items go through a strict quality check before listing.",
-    "value3Title": "Fast Shipping",
-    "value3Text": "Reliable delivery with real-time order tracking.",
-    "value4Title": "24/7 Support",
-    "value4Text": "Our team is always ready to help with any question.",
-    "storyTitle": "Our Story",
-    "storyText": "ShopLux started with a simple idea: online shopping should feel as premium as the products themselves. Today, we aim to provide customers with quality products, thoughtful design, and a smooth experience from browsing to checkout."
+    "hero": {
+      "badge": "About ShopLux",
+      "title": "A Better Way to Discover What You Love",
+      "description": "ShopLux brings together quality products, a smooth shopping experience, and trusted service in one modern destination. We believe online shopping should feel simple, personal, and enjoyable.",
+      "button": "Explore Products",
+      "secondaryButton": "Start Shopping",
+      "trust": "A shopping experience built around you",
+      "rating": "Customer rating"
+    },
+
+    "stats": {
+      "customers": "Happy Customers",
+      "products": "Products",
+      "satisfaction": "Customer Satisfaction",
+      "support": "Customer Support"
+    },
+
+    "story": {
+      "eyebrow": "Our Story",
+      "title": "Built Around Better Shopping",
+      "text1": "ShopLux was created with a simple idea: online shopping should be more than browsing products and clicking checkout. It should be an experience that feels clear, trustworthy, and enjoyable from the first visit to the final delivery.",
+      "text2": "We carefully shape every part of the experience around our customers — from discovering products and making secure payments to receiving orders and getting the support they need.",
+      "point1": "Carefully selected products",
+      "point2": "Simple and trusted shopping experience",
+      "point3": "Customer-first service"
+    },
+
+    "whyChoose": {
+      "eyebrow": "Why ShopLux",
+      "title": "Why Choose ShopLux?",
+      "subtitle": "Everything we do is designed to make your shopping experience easier, safer, and more enjoyable."
+    },
+
+    "features": {
+      "shipping": {
+        "title": "Fast & Reliable Delivery",
+        "text": "We focus on making every order reach you safely and efficiently."
+      },
+      "payment": {
+        "title": "Secure Payments",
+        "text": "Your shopping experience is designed with security and peace of mind in mind."
+      },
+      "quality": {
+        "title": "Quality You Can Trust",
+        "text": "We believe customers deserve products that deliver real value and quality."
+      },
+      "support": {
+        "title": "Customer Support",
+        "text": "Our goal is to make sure you can always find help when you need it."
+      }
+    },
+
+    "values": {
+      "eyebrow": "What We Believe In",
+      "title": "Our Values",
+      "subtitle": "The principles behind every product, interaction, and experience at ShopLux.",
+      "customer": {
+        "title": "Customer First",
+        "text": "We put our customers at the center of every decision we make."
+      },
+      "quality": {
+        "title": "Quality",
+        "text": "We value products and experiences that meet high standards."
+      },
+      "trust": {
+        "title": "Trust",
+        "text": "We believe transparency and reliability are essential to great shopping."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "text": "We continuously look for better ways to improve the digital shopping experience."
+      }
+    },
+
+    "operations": {
+      "eyebrow": "Behind ShopLux",
+      "title": "Every Detail Matters",
+      "text": "A great e-commerce experience is built behind the scenes too. From product organization and order processing to customer service, every detail contributes to a smoother journey.",
+      "point1Title": "Always Improving",
+      "point1Text": "We continuously refine our store and customer experience.",
+      "point2Title": "Focused on Reliability",
+      "point2Text": "We aim to deliver a consistent experience across every step of the journey."
+    },
+
+    "cta": {
+      "title": "Ready to Discover Something New?",
+      "text": "Explore our collections and find products selected to make everyday shopping easier and better.",
+      "button": "Shop Now"
+    },
+
+    "images": {
+      "heroAlt": "Customer shopping online",
+      "storyAlt": "Customers enjoying their online shopping experience",
+      "teamAlt": "E-commerce team working with orders and packages"
+    }
   },
+
   "contact": {
     "title": "Contact Us",
     "subtitle": "Have a question about an order, a product, or anything else? Send us a message and we'll get back to you shortly.",
