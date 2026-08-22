@@ -25,7 +25,7 @@ export function ThemeProvider({ children }) {
         document.documentElement.lang = i18n.language;
     }, [direction, i18n.language]);
 
-    const emotionCache = useMemo(() => createEmotionCache(direction), [direction]);
+    const emotionCache = useMemo(() => createEmotionCache(), []);
     const theme = useMemo(() => getTheme(mode, direction), [mode, direction]);
 
     return (
