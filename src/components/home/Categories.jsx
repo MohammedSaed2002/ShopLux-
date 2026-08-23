@@ -19,18 +19,22 @@ export default function Categories({
         {
             image: beautyIcon,
             title: t("home.categoryBeauty"),
+            path: "/category/beauty",
         },
         {
             image: electronicsIcon,
             title: t("home.categoryElectronics"),
+            path: "/products",
         },
         {
             image: fashionIcon,
             title: t("home.categoryFashion"),
+            path: "/category/fashion",
         },
         {
             image: homeIcon,
             title: t("home.categoryHome"),
+            path: "/category/home",
         },
     ]
 
@@ -55,7 +59,9 @@ export default function Categories({
                     lg: 8,
                 },
 
-                direction: isRTL ? "rtl" : "ltr",
+                direction: isRTL
+                    ? "rtl"
+                    : "ltr",
             }}
         >
             <Box
@@ -64,7 +70,6 @@ export default function Categories({
                     mx: "auto",
                 }}
             >
-                
                 <Box
                     sx={{
                         display: "flex",
@@ -74,7 +79,8 @@ export default function Categories({
                             sm: "center",
                         },
 
-                        justifyContent: "space-between",
+                        justifyContent:
+                            "space-between",
 
                         gap: 2,
 
@@ -85,14 +91,21 @@ export default function Categories({
                             sm: "row",
                         },
 
-                        direction: isRTL ? "rtl" : "ltr",
+                        direction: isRTL
+                            ? "rtl"
+                            : "ltr",
                     }}
                 >
                     <Box
                         sx={{
                             textAlign: {
-                                xs: isRTL ? "right" : "left",
-                                sm: isRTL ? "right" : "left",
+                                xs: isRTL
+                                    ? "right"
+                                    : "left",
+
+                                sm: isRTL
+                                    ? "right"
+                                    : "left",
                             },
                         }}
                     >
@@ -114,7 +127,9 @@ export default function Categories({
                                 mb: 1,
                             }}
                         >
-                            {t("home.categoriesTitle")}
+                            {t(
+                                "home.categoriesTitle"
+                            )}
                         </Typography>
 
                         <Typography
@@ -126,12 +141,16 @@ export default function Categories({
                                 fontSize: "14px",
                             }}
                         >
-                            {t("home.categoriesSubtitle")}
+                            {t(
+                                "home.categoriesSubtitle"
+                            )}
                         </Typography>
                     </Box>
 
                     <Button
-                        onClick={() => navigate("/products")}
+                        onClick={() =>
+                            navigate("/products")
+                        }
                         sx={{
                             color: isDark
                                 ? "#FFB07C"
@@ -177,94 +196,112 @@ export default function Categories({
                         },
                     }}
                 >
-                    {categories.map((category) => (
-                        <Box
-                            key={category.title}
-                            onClick={() =>
-                                navigate("/products")
-                            }
-                            sx={{
-                                cursor: "pointer",
-
-                                backgroundColor: isDark
-                                    ? "#1B1024"
-                                    : "#FFFFFF",
-
-                                border: isDark
-                                    ? "1px solid rgba(255,255,255,0.07)"
-                                    : "1px solid rgba(36,17,63,0.07)",
-
-                                borderRadius: "18px",
-
-                                minHeight: {
-                                    xs: 150,
-                                    sm: 180,
-                                },
-
-                                display: "flex",
-
-                                flexDirection: "column",
-
-                                alignItems: "center",
-
-                                justifyContent: "center",
-
-                                gap: 1.5,
-
-                                transition:
-                                    "transform 0.25s ease, box-shadow 0.25s ease",
-
-                                "&:hover": {
-                                    transform:
-                                        "translateY(-5px)",
-
-                                    boxShadow: isDark
-                                        ? "0 15px 35px rgba(0,0,0,0.25)"
-                                        : "0 15px 35px rgba(36,17,63,0.10)",
-                                },
-                            }}
-                        >
+                    {categories.map(
+                        (category) => (
                             <Box
-                                component="img"
-                                src={category.image}
-                                alt={category.title}
+                                key={category.title}
+                                onClick={() =>
+                                    navigate(
+                                        category.path
+                                    )
+                                }
                                 sx={{
-                                    width: {
-                                        xs: 65,
-                                        sm: 80,
+                                    cursor: "pointer",
+
+                                    backgroundColor:
+                                        isDark
+                                            ? "#1B1024"
+                                            : "#FFFFFF",
+
+                                    border: isDark
+                                        ? "1px solid rgba(255,255,255,0.07)"
+                                        : "1px solid rgba(36,17,63,0.07)",
+
+                                    borderRadius:
+                                        "18px",
+
+                                    minHeight: {
+                                        xs: 150,
+                                        sm: 180,
                                     },
 
-                                    height: {
-                                        xs: 65,
-                                        sm: 80,
+                                    display: "flex",
+
+                                    flexDirection:
+                                        "column",
+
+                                    alignItems:
+                                        "center",
+
+                                    justifyContent:
+                                        "center",
+
+                                    gap: 1.5,
+
+                                    transition:
+                                        "transform 0.25s ease, box-shadow 0.25s ease",
+
+                                    "&:hover": {
+                                        transform:
+                                            "translateY(-5px)",
+
+                                        boxShadow:
+                                            isDark
+                                                ? "0 15px 35px rgba(0,0,0,0.25)"
+                                                : "0 15px 35px rgba(36,17,63,0.10)",
                                     },
-
-                                    objectFit: "contain",
-
-                                    display: "block",
-                                }}
-                            />
-
-                            <Typography
-                                sx={{
-                                    color: isDark
-                                        ? "#FFFFFF"
-                                        : "#24113F",
-
-                                    fontWeight: 700,
-
-                                    fontSize: {
-                                        xs: "13px",
-                                        sm: "15px",
-                                    },
-
-                                    textAlign: "center",
                                 }}
                             >
-                                {category.title}
-                            </Typography>
-                        </Box>
-                    ))}
+                                <Box
+                                    component="img"
+                                    src={
+                                        category.image
+                                    }
+                                    alt={
+                                        category.title
+                                    }
+                                    sx={{
+                                        width: {
+                                            xs: 65,
+                                            sm: 80,
+                                        },
+
+                                        height: {
+                                            xs: 65,
+                                            sm: 80,
+                                        },
+
+                                        objectFit:
+                                            "contain",
+
+                                        display: "block",
+                                    }}
+                                />
+
+                                <Typography
+                                    sx={{
+                                        color: isDark
+                                            ? "#FFFFFF"
+                                            : "#24113F",
+
+                                        fontWeight: 700,
+
+                                        fontSize: {
+                                            xs: "13px",
+                                            sm: "15px",
+                                        },
+
+                                        textAlign:
+                                            "center",
+                                    }}
+                                >
+                                    {
+                                        category.title
+                                    }
+                                </Typography>
+                            </Box>
+                        )
+                    )}
                 </Box>
             </Box>
         </Box>
