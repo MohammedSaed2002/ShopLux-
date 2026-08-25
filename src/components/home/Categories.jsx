@@ -19,7 +19,7 @@ export default function Categories({
         {
             image: beautyIcon,
             title: t("home.categoryBeauty"),
-            path: "/category/beauty",
+            path: "/products/coming-soon/beauty",
         },
         {
             image: electronicsIcon,
@@ -29,12 +29,12 @@ export default function Categories({
         {
             image: fashionIcon,
             title: t("home.categoryFashion"),
-            path: "/category/fashion",
+            path: "/products/coming-soon/fashion",
         },
         {
             image: homeIcon,
             title: t("home.categoryHome"),
-            path: "/category/home",
+            path: "/products/coming-soon/home",
         },
     ]
 
