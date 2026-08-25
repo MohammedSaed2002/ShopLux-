@@ -197,7 +197,13 @@
     "loadErrorSubtitle": "This product may have been removed or the link is broken.",
     "backToProducts": "Back to Products",
     "addedToCart": "Added to cart!",
-    "addToCartError": "Could not add this product to your cart. Please try again."
+    "addToCartError": "Could not add this product to your cart. Please try again.",
+    "ratingBreakdownTitle": "Customer Ratings",
+    "basedOnReviews": "Based on {{count}} reviews",
+    "inStock": "In Stock",
+    "lowStock": "Only {{count}} left in stock",
+    "outOfStock": "Out of Stock",
+    "relatedTitle": "You Might Also Like"
   },
   "reviews": {
     "title": "Reviews",

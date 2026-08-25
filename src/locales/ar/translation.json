@@ -199,7 +199,13 @@
     "addedToCart": "تمت الإضافة إلى السلة!",
     "addToCartError": "تعذّرت إضافة هذا المنتج إلى السلة. حاول مرة أخرى.",
     "allProducts": "All Products",
-    "productsAvailable": "products"
+    "productsAvailable": "products",
+    "ratingBreakdownTitle": "تقييمات العملاء",
+    "basedOnReviews": "بناءً على {{count}} تقييم",
+    "inStock": "متوفر بالمخزون",
+    "lowStock": "متبقّي {{count}} قطع فقط",
+    "outOfStock": "غير متوفر حالياً",
+    "relatedTitle": "قد تعجبك أيضاً"
   },
   "reviews": {
     "title": "التقييمات",
