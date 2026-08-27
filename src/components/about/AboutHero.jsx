@@ -19,7 +19,6 @@ export default function AboutHero({ t, navigate, isRTL }) {
 
     return (
         <Box
-            dir={isRTL ? "rtl" : "ltr"}
             sx={{
                 position: "relative",
                 minHeight: { xs: "auto", md: 650 },
@@ -45,6 +44,7 @@ export default function AboutHero({ t, navigate, isRTL }) {
                     )`,
             }}
         >
+            {/* الدائرة الزخرفية العلوية — position:absolute فيزيائي، لازم isRTL يدوي */}
             <Box
                 sx={{
                     position: "absolute",
@@ -60,6 +60,7 @@ export default function AboutHero({ t, navigate, isRTL }) {
                 }}
             />
 
+            {/* الدائرة الزخرفية السفلية */}
             <Box
                 sx={{
                     position: "absolute",
@@ -75,17 +76,14 @@ export default function AboutHero({ t, navigate, isRTL }) {
                 }}
             />
 
+            {/* النص — بدون order، الترتيب بالـ DOM كافي والمتصفح بيقلب تلقائيًا */}
             <Box
                 sx={{
                     position: "relative",
                     zIndex: 1,
-                    order: {
-                        xs: 2,
-                        md: isRTL ? 2 : 1,
-                    },
                     textAlign: {
                         xs: "center",
-                        md: isRTL ? "right" : "left",
+                        md: "start",
                     },
                 }}
             >
@@ -98,10 +96,7 @@ export default function AboutHero({ t, navigate, isRTL }) {
                         px: 1,
                         py: 2.5,
                         borderRadius: 10,
-                        borderColor: alpha(
-                            theme.palette.primary.main,
-                            0.35
-                        ),
+                        borderColor: alpha(theme.palette.primary.main, 0.35),
                         color: "primary.main",
                         fontWeight: 700,
                         "& .MuiChip-icon": {
@@ -161,11 +156,7 @@ export default function AboutHero({ t, navigate, isRTL }) {
                         onClick={() => navigate("/products")}
                         endIcon={
                             isRTL ? (
-                                <ArrowForwardIcon
-                                    sx={{
-                                        transform: "rotate(180deg)",
-                                    }}
-                                />
+                                <ArrowForwardIcon sx={{ transform: "rotate(180deg)" }} />
                             ) : (
                                 <ArrowForwardIcon />
                             )
@@ -176,10 +167,7 @@ export default function AboutHero({ t, navigate, isRTL }) {
                             borderRadius: 3,
                             textTransform: "none",
                             fontWeight: 700,
-                            boxShadow: `0 12px 30px ${alpha(
-                                theme.palette.primary.main,
-                                0.25
-                            )}`,
+                            boxShadow: `0 12px 30px ${alpha(theme.palette.primary.main, 0.25)}`,
                         }}
                     >
                         {t("about.hero.button")}
@@ -214,32 +202,19 @@ export default function AboutHero({ t, navigate, isRTL }) {
                         color: "text.secondary",
                     }}
                 >
-                    <CheckCircleOutlinedIcon
-                        sx={{
-                            fontSize: 20,
-                            color: "success.main",
-                        }}
-                    />
+                    <CheckCircleOutlinedIcon sx={{ fontSize: 20, color: "success.main" }} />
 
-                    <Typography
-                        variant="body2"
-                        sx={{
-                            fontWeight: 600,
-                        }}
-                    >
+                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
                         {t("about.hero.trust")}
                     </Typography>
                 </Box>
             </Box>
 
+            {/* الصورة — بدون order برضه */}
             <Box
                 sx={{
                     position: "relative",
                     zIndex: 1,
-                    order: {
-                        xs: 1,
-                        md: isRTL ? 1 : 2,
-                    },
                     display: "flex",
                     justifyContent: "center",
                 }}
@@ -254,20 +229,10 @@ export default function AboutHero({ t, navigate, isRTL }) {
                     <Box
                         sx={{
                             position: "relative",
-                            height: {
-                                xs: 340,
-                                sm: 430,
-                                md: 500,
-                            },
-                            borderRadius: {
-                                xs: 4,
-                                md: 6,
-                            },
+                            height: { xs: 340, sm: 430, md: 500 },
+                            borderRadius: { xs: 4, md: 6 },
                             overflow: "hidden",
-                            boxShadow: `0 30px 70px ${alpha(
-                                theme.palette.common.black,
-                                isDark ? 0.35 : 0.16
-                            )}`,
+                            boxShadow: `0 30px 70px ${alpha(theme.palette.common.black, isDark ? 0.35 : 0.16)}`,
                             border: "1px solid",
                             borderColor: "divider",
                         }}
@@ -292,28 +257,19 @@ export default function AboutHero({ t, navigate, isRTL }) {
                                 background: `linear-gradient(
                                     180deg,
                                     transparent 50%,
-                                    ${alpha(
-                                        theme.palette.common.black,
-                                        0.5
-                                    )} 100%
+                                    ${alpha(theme.palette.common.black, 0.5)} 100%
                                 )`,
                             }}
                         />
                     </Box>
 
+                    {/* البادج العائم — position:absolute فيزيائي، isRTL يدوي ضروري */}
                     <Box
                         sx={{
                             position: "absolute",
-                            bottom: {
-                                xs: -18,
-                                md: -24,
-                            },
-                            left: isRTL
-                                ? "auto"
-                                : { xs: 12, md: -28 },
-                            right: isRTL
-                                ? { xs: 12, md: -28 }
-                                : "auto",
+                            bottom: { xs: -18, md: -24 },
+                            left: isRTL ? "auto" : { xs: 12, md: -28 },
+                            right: isRTL ? { xs: 12, md: -28 } : "auto",
                             display: "flex",
                             alignItems: "center",
                             gap: 1.5,
@@ -323,10 +279,7 @@ export default function AboutHero({ t, navigate, isRTL }) {
                             backgroundColor: "background.paper",
                             border: "1px solid",
                             borderColor: "divider",
-                            boxShadow: `0 18px 40px ${alpha(
-                                theme.palette.common.black,
-                                0.15
-                            )}`,
+                            boxShadow: `0 18px 40px ${alpha(theme.palette.common.black, 0.15)}`,
                         }}
                     >
                         <Box
@@ -337,10 +290,7 @@ export default function AboutHero({ t, navigate, isRTL }) {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                backgroundColor: alpha(
-                                    theme.palette.warning.main,
-                                    0.12
-                                ),
+                                backgroundColor: alpha(theme.palette.warning.main, 0.12),
                                 color: "warning.main",
                             }}
                         >
@@ -348,19 +298,11 @@ export default function AboutHero({ t, navigate, isRTL }) {
                         </Box>
 
                         <Box>
-                            <Typography
-                                sx={{
-                                    fontWeight: 900,
-                                    lineHeight: 1.1,
-                                }}
-                            >
+                            <Typography sx={{ fontWeight: 900, lineHeight: 1.1 }}>
                                 4.9/5
                             </Typography>
 
-                            <Typography
-                                variant="caption"
-                                color="text.secondary"
-                            >
+                            <Typography variant="caption" color="text.secondary">
                                 {t("about.hero.rating")}
                             </Typography>
                         </Box>

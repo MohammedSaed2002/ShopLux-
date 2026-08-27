@@ -31,31 +31,16 @@ export default function AboutCTA({ t, navigate, isRTL }) {
                     background: isDark
                         ? `linear-gradient(
                             135deg,
-                            ${alpha(
-                                theme.palette.primary.dark,
-                                0.65
-                            )},
-                            ${alpha(
-                                theme.palette.secondary.dark,
-                                0.45
-                            )}
+                            ${alpha(theme.palette.primary.dark, 0.65)},
+                            ${alpha(theme.palette.secondary.dark, 0.45)}
                         )`
                         : `linear-gradient(
                             135deg,
-                            ${alpha(
-                                theme.palette.primary.main,
-                                0.12
-                            )},
-                            ${alpha(
-                                theme.palette.secondary.main,
-                                0.1
-                            )}
+                            ${alpha(theme.palette.primary.main, 0.12)},
+                            ${alpha(theme.palette.secondary.main, 0.1)}
                         )`,
                     border: "1px solid",
-                    borderColor: alpha(
-                        theme.palette.primary.main,
-                        0.2
-                    ),
+                    borderColor: alpha(theme.palette.primary.main, 0.2),
                 }}
             >
                 <Box
@@ -65,11 +50,8 @@ export default function AboutCTA({ t, navigate, isRTL }) {
                         height: 250,
                         borderRadius: "50%",
                         top: -150,
-                        left: -100,
-                        backgroundColor: alpha(
-                            theme.palette.primary.main,
-                            0.1
-                        ),
+                        insetInlineStart: -100,
+                        backgroundColor: alpha(theme.palette.primary.main, 0.1),
                         filter: "blur(10px)",
                     }}
                 />
@@ -85,10 +67,7 @@ export default function AboutCTA({ t, navigate, isRTL }) {
                         sx={{
                             fontWeight: 900,
                             mb: 2,
-                            fontSize: {
-                                xs: "2rem",
-                                md: "2.8rem",
-                            },
+                            fontSize: { xs: "2rem", md: "2.8rem" },
                         }}
                     >
                         {t("about.cta.title")}
@@ -112,12 +91,7 @@ export default function AboutCTA({ t, navigate, isRTL }) {
                         onClick={() => navigate("/products")}
                         endIcon={
                             isRTL ? (
-                                <ArrowForwardIcon
-                                    sx={{
-                                        transform:
-                                            "rotate(180deg)",
-                                    }}
-                                />
+                                <ArrowForwardIcon sx={{ transform: "rotate(180deg)" }} />
                             ) : (
                                 <ArrowForwardIcon />
                             )

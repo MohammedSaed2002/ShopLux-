@@ -80,21 +80,13 @@ export default function WhyChoose({ t }) {
                         sx={{
                             fontWeight: 900,
                             mb: 2,
-                            fontSize: {
-                                xs: "2rem",
-                                md: "2.8rem",
-                            },
+                            fontSize: { xs: "2rem", md: "2.8rem" },
                         }}
                     >
                         {t("about.whyChoose.title")}
                     </Typography>
 
-                    <Typography
-                        color="text.secondary"
-                        sx={{
-                            lineHeight: 1.8,
-                        }}
-                    >
+                    <Typography color="text.secondary" sx={{ lineHeight: 1.8 }}>
                         {t("about.whyChoose.subtitle")}
                     </Typography>
                 </Box>
@@ -119,18 +111,11 @@ export default function WhyChoose({ t }) {
                                 backgroundColor: "background.paper",
                                 border: "1px solid",
                                 borderColor: "divider",
-                                transition:
-                                    "transform .25s ease, box-shadow .25s ease, border-color .25s ease",
+                                transition: "transform .25s ease, box-shadow .25s ease, border-color .25s ease",
                                 "&:hover": {
                                     transform: "translateY(-7px)",
-                                    borderColor: alpha(
-                                        theme.palette.primary.main,
-                                        0.35
-                                    ),
-                                    boxShadow: `0 18px 40px ${alpha(
-                                        theme.palette.common.black,
-                                        isDark ? 0.18 : 0.08
-                                    )}`,
+                                    borderColor: alpha(theme.palette.primary.main, 0.35),
+                                    boxShadow: `0 18px 40px ${alpha(theme.palette.common.black, isDark ? 0.18 : 0.08)}`,
                                 },
                             }}
                         >
@@ -143,31 +128,21 @@ export default function WhyChoose({ t }) {
                                     alignItems: "center",
                                     justifyContent: "center",
                                     mb: 2.5,
-                                    backgroundColor: alpha(
-                                        theme.palette.primary.main,
-                                        0.1
-                                    ),
+                                    backgroundColor: alpha(theme.palette.primary.main, 0.1),
                                     color: "primary.main",
                                 }}
                             >
                                 {feature.icon}
                             </Box>
 
-                            <Typography
-                                sx={{
-                                    fontWeight: 800,
-                                    mb: 1,
-                                }}
-                            >
+                            <Typography sx={{ fontWeight: 800, mb: 1 }}>
                                 {feature.title}
                             </Typography>
 
                             <Typography
                                 variant="body2"
                                 color="text.secondary"
-                                sx={{
-                                    lineHeight: 1.8,
-                                }}
+                                sx={{ lineHeight: 1.8 }}
                             >
                                 {feature.text}
                             </Typography>

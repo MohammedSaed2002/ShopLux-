@@ -38,6 +38,7 @@ const SORT_OPTIONS = [
     { value: "price-asc", sortBy: "price", ascending: true, labelKey: "products.sortPriceAsc" },
     { value: "price-desc", sortBy: "price", ascending: false, labelKey: "products.sortPriceDesc" },
     { value: "rate-desc", sortBy: "rate", ascending: false, labelKey: "products.sortRateDesc" },
+    { value: "rate-asc", sortBy: "rate", ascending: true, labelKey: "products.sortRateAsc" },
 ]
 
 const CATEGORIES = [

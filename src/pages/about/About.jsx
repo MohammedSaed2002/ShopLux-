@@ -25,12 +25,10 @@ export default function About() {
 
             <AboutStats
                 t={t}
-                isRTL={isRTL}
             />
 
             <OurStory
                 t={t}
-                isRTL={isRTL}
             />
 
             <WhyChoose
@@ -39,12 +37,10 @@ export default function About() {
 
             <OurValues
                 t={t}
-                isRTL={isRTL}
             />
 
             <Operations
                 t={t}
-                isRTL={isRTL}
             />
 
             <AboutCTA

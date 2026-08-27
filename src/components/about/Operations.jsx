@@ -8,7 +8,7 @@ import { useTheme, alpha } from "@mui/material/styles"
 
 import aboutTeamImage from "../../assets/about-team.jpg"
 
-export default function Operations({ t, isRTL }) {
+export default function Operations({ t }) {
     const theme = useTheme()
 
     return (
@@ -35,30 +35,16 @@ export default function Operations({ t, isRTL }) {
                     alignItems: "center",
                 }}
             >
-                <Box
-                    sx={{
-                        order: {
-                            xs: 1,
-                            md: isRTL ? 2 : 1,
-                        },
-                    }}
-                >
+                <Box>
                     <Box
                         sx={{
                             position: "relative",
-                            height: {
-                                xs: 320,
-                                sm: 400,
-                                md: 470,
-                            },
+                            height: { xs: 320, sm: 400, md: 470 },
                             borderRadius: 5,
                             overflow: "hidden",
                             border: "1px solid",
                             borderColor: "divider",
-                            boxShadow: `0 25px 60px ${alpha(
-                                theme.palette.common.black,
-                                0.1
-                            )}`,
+                            boxShadow: `0 25px 60px ${alpha(theme.palette.common.black, 0.1)}`,
                         }}
                     >
                         <Box
@@ -77,13 +63,9 @@ export default function Operations({ t, isRTL }) {
 
                 <Box
                     sx={{
-                        order: {
-                            xs: 2,
-                            md: isRTL ? 1 : 2,
-                        },
                         textAlign: {
                             xs: "center",
-                            md: isRTL ? "right" : "left",
+                            md: "start",
                         },
                     }}
                 >
@@ -106,68 +88,34 @@ export default function Operations({ t, isRTL }) {
                             fontWeight: 900,
                             mb: 3,
                             lineHeight: 1.15,
-                            fontSize: {
-                                xs: "2rem",
-                                md: "2.7rem",
-                            },
+                            fontSize: { xs: "2rem", md: "2.7rem" },
                         }}
                     >
                         {t("about.operations.title")}
                     </Typography>
 
-                    <Typography
-                        color="text.secondary"
-                        sx={{
-                            lineHeight: 1.9,
-                            mb: 3,
-                        }}
-                    >
+                    <Typography color="text.secondary" sx={{ lineHeight: 1.9, mb: 3 }}>
                         {t("about.operations.text")}
                     </Typography>
 
-                    <Box
-                        sx={{
-                            display: "grid",
-                            gap: 2,
-                        }}
-                    >
+                    <Box sx={{ display: "grid", gap: 2 }}>
                         <Box
                             sx={{
                                 display: "flex",
                                 gap: 1.5,
                                 alignItems: "flex-start",
-                                justifyContent: {
-                                    xs: "center",
-                                    md: "flex-start",
-                                },
+                                justifyContent: { xs: "center", md: "flex-start" },
                             }}
                         >
-                            <TrendingUpOutlinedIcon
-                                sx={{
-                                    color: "primary.main",
-                                    mt: 0.3,
-                                }}
-                            />
+                            <TrendingUpOutlinedIcon sx={{ color: "primary.main", mt: 0.3 }} />
 
                             <Box>
-                                <Typography
-                                    sx={{
-                                        fontWeight: 800,
-                                        mb: 0.5,
-                                    }}
-                                >
-                                    {t(
-                                        "about.operations.point1Title"
-                                    )}
+                                <Typography sx={{ fontWeight: 800, mb: 0.5 }}>
+                                    {t("about.operations.point1Title")}
                                 </Typography>
 
-                                <Typography
-                                    variant="body2"
-                                    color="text.secondary"
-                                >
-                                    {t(
-                                        "about.operations.point1Text"
-                                    )}
+                                <Typography variant="body2" color="text.secondary">
+                                    {t("about.operations.point1Text")}
                                 </Typography>
                             </Box>
                         </Box>
@@ -177,38 +125,18 @@ export default function Operations({ t, isRTL }) {
                                 display: "flex",
                                 gap: 1.5,
                                 alignItems: "flex-start",
-                                justifyContent: {
-                                    xs: "center",
-                                    md: "flex-start",
-                                },
+                                justifyContent: { xs: "center", md: "flex-start" },
                             }}
                         >
-                            <VerifiedOutlinedIcon
-                                sx={{
-                                    color: "success.main",
-                                    mt: 0.3,
-                                }}
-                            />
+                            <VerifiedOutlinedIcon sx={{ color: "success.main", mt: 0.3 }} />
 
                             <Box>
-                                <Typography
-                                    sx={{
-                                        fontWeight: 800,
-                                        mb: 0.5,
-                                    }}
-                                >
-                                    {t(
-                                        "about.operations.point2Title"
-                                    )}
+                                <Typography sx={{ fontWeight: 800, mb: 0.5 }}>
+                                    {t("about.operations.point2Title")}
                                 </Typography>
 
-                                <Typography
-                                    variant="body2"
-                                    color="text.secondary"
-                                >
-                                    {t(
-                                        "about.operations.point2Text"
-                                    )}
+                                <Typography variant="body2" color="text.secondary">
+                                    {t("about.operations.point2Text")}
                                 </Typography>
                             </Box>
                         </Box>

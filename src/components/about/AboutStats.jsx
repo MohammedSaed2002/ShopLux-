@@ -8,7 +8,7 @@ import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined"
 
 import { useTheme, alpha } from "@mui/material/styles"
 
-export default function AboutStats({ t, isRTL }) {
+export default function AboutStats({ t }) {
     const theme = useTheme()
 
     const stats = [
@@ -64,22 +64,12 @@ export default function AboutStats({ t, isRTL }) {
                             textAlign: "center",
                             px: { xs: 2, md: 3 },
                             py: 2,
-                            borderRight:
-                                !isRTL &&
-                                index !== stats.length - 1
-                                    ? "1px solid"
-                                    : "none",
-                            borderLeft:
-                                isRTL &&
-                                index !== stats.length - 1
-                                    ? "1px solid"
-                                    : "none",
+                            borderInlineEnd: {
+                                md: index !== stats.length - 1 ? "1px solid" : "none",
+                            },
                             borderColor: "divider",
                             borderBottom: {
-                                xs:
-                                    index < 2
-                                        ? "1px solid"
-                                        : "none",
+                                xs: index < 2 ? "1px solid" : "none",
                                 md: "none",
                             },
                         }}
@@ -94,10 +84,7 @@ export default function AboutStats({ t, isRTL }) {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                backgroundColor: alpha(
-                                    theme.palette.primary.main,
-                                    0.1
-                                ),
+                                backgroundColor: alpha(theme.palette.primary.main, 0.1),
                                 color: "primary.main",
                             }}
                         >
@@ -118,10 +105,7 @@ export default function AboutStats({ t, isRTL }) {
                             {stat.value}
                         </Typography>
 
-                        <Typography
-                            variant="body2"
-                            color="text.secondary"
-                        >
+                        <Typography variant="body2" color="text.secondary">
                             {stat.label}
                         </Typography>
                     </Box>

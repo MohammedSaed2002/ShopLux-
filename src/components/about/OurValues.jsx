@@ -8,7 +8,7 @@ import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined"
 
 import { useTheme, alpha } from "@mui/material/styles"
 
-export default function OurValues({ t, isRTL }) {
+export default function OurValues({ t }) {
     const theme = useTheme()
 
     const values = [
@@ -73,21 +73,13 @@ export default function OurValues({ t, isRTL }) {
                         sx={{
                             fontWeight: 900,
                             mb: 2,
-                            fontSize: {
-                                xs: "2rem",
-                                md: "2.8rem",
-                            },
+                            fontSize: { xs: "2rem", md: "2.8rem" },
                         }}
                     >
                         {t("about.values.title")}
                     </Typography>
 
-                    <Typography
-                        color="text.secondary"
-                        sx={{
-                            lineHeight: 1.8,
-                        }}
-                    >
+                    <Typography color="text.secondary" sx={{ lineHeight: 1.8 }}>
                         {t("about.values.subtitle")}
                     </Typography>
                 </Box>
@@ -114,7 +106,7 @@ export default function OurValues({ t, isRTL }) {
                                 borderColor: "divider",
                                 textAlign: {
                                     xs: "center",
-                                    md: isRTL ? "right" : "left",
+                                    md: "start",
                                 },
                             }}
                         >
@@ -127,31 +119,21 @@ export default function OurValues({ t, isRTL }) {
                                     alignItems: "center",
                                     justifyContent: "center",
                                     mb: 2,
-                                    backgroundColor: alpha(
-                                        theme.palette.secondary.main,
-                                        0.1
-                                    ),
+                                    backgroundColor: alpha(theme.palette.secondary.main, 0.1),
                                     color: "secondary.main",
                                 }}
                             >
                                 {value.icon}
                             </Box>
 
-                            <Typography
-                                sx={{
-                                    fontWeight: 800,
-                                    mb: 1,
-                                }}
-                            >
+                            <Typography sx={{ fontWeight: 800, mb: 1 }}>
                                 {value.title}
                             </Typography>
 
                             <Typography
                                 variant="body2"
                                 color="text.secondary"
-                                sx={{
-                                    lineHeight: 1.8,
-                                }}
+                                sx={{ lineHeight: 1.8 }}
                             >
                                 {value.text}
                             </Typography>

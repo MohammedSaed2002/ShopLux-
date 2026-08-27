@@ -7,7 +7,7 @@ import { useTheme, alpha } from "@mui/material/styles"
 
 import aboutStoryImage from "../../assets/about-story.jpg"
 
-export default function OurStory({ t, isRTL }) {
+export default function OurStory({ t }) {
     const theme = useTheme()
 
     return (
@@ -30,14 +30,7 @@ export default function OurStory({ t, isRTL }) {
                     alignItems: "center",
                 }}
             >
-                <Box
-                    sx={{
-                        order: {
-                            xs: 1,
-                            md: isRTL ? 2 : 1,
-                        },
-                    }}
-                >
+                <Box>
                     <Box
                         sx={{
                             position: "relative",
@@ -50,10 +43,7 @@ export default function OurStory({ t, isRTL }) {
                             },
                             border: "1px solid",
                             borderColor: "divider",
-                            boxShadow: `0 25px 60px ${alpha(
-                                theme.palette.common.black,
-                                0.12
-                            )}`,
+                            boxShadow: `0 25px 60px ${alpha(theme.palette.common.black, 0.12)}`,
                         }}
                     >
                         <Box
@@ -72,13 +62,9 @@ export default function OurStory({ t, isRTL }) {
 
                 <Box
                     sx={{
-                        order: {
-                            xs: 2,
-                            md: isRTL ? 1 : 2,
-                        },
                         textAlign: {
                             xs: "center",
-                            md: isRTL ? "right" : "left",
+                            md: "start",
                         },
                     }}
                 >
@@ -161,11 +147,7 @@ export default function OurStory({ t, isRTL }) {
                                     }}
                                 />
 
-                                <Typography
-                                    sx={{
-                                        fontWeight: 600,
-                                    }}
-                                >
+                                <Typography sx={{ fontWeight: 600 }}>
                                     {point}
                                 </Typography>
                             </Box>

@@ -18,7 +18,8 @@ const ROUTE_MAP = {
 };
 
 export default function Footer() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const isRTL = i18n.dir() === "rtl";
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [subscribed, setSubscribed] = useState(false);
@@ -119,7 +120,10 @@ export default function Footer() {
                             onClick={handleSubscribe}
                             sx={{ backgroundColor: "primary.dark", color: "#fff", "&:hover": { backgroundColor: "primary.main" } }}
                         >
-                            <SendIcon fontSize="small" />
+                            <SendIcon
+                                fontSize="small"
+                                sx={{ transform: isRTL ? "scaleX(-1)" : "none" }}
+                            />
                         </IconButton>
                     </Box>
                 </Box>
